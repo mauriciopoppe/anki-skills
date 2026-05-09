@@ -2,6 +2,16 @@
 
 An ecosystem of **AI Skills** for Anki that automates the creation of high-quality study materials. These tools enable AI agents to enrich your decks with mnemonics, i+1 example sentences, conversational frequency data, and monolingual hints directly through AnkiConnect.
 
+## Prerequisites
+
+All skills require **Anki** to be running with the **[AnkiConnect](https://ankiweb.net/shared/info/2055492159)** add-on installed.
+
+To verify your setup, run this command in your terminal:
+
+```bash
+curl -s -X POST http://localhost:8765 -d '{"action": "version", "version": 6}'
+```
+
 ## How it Works
 
 These skills are stored in the `skills/` directory. They follow the [Agent Skills](https://github.com/vercel-labs/skills) specification, making them portable and easy to install in any project.
@@ -197,6 +207,18 @@ Process a limit of 200 notes with a batch size of 50. Parallelize where possible
 
 - **Back up your deck** using `anki-backup-deck` before running skills that modify your database.
 - **AnkiConnect** must be configured to allow your AI agent to talk to Anki.
-- Check your agent's documentation to verify that all workspace skills are properly loaded.
+- Check your agent's documentation to verify that all skills are properly loaded.
+
+---
+
+## Testing
+
+### Skill Validation
+To ensure all skills adhere to the [Agent Skills](https://github.com/vercel-labs/skills) specification (valid frontmatter, structure, and paths), run the validation script:
+
+```bash
+python3 tests/validate_skills.py
+```
 
 License: MIT
+
