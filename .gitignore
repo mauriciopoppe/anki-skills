@@ -3,6 +3,7 @@ temp_extraction
 french-dictionary/data
 french-dictionary/yomitan_build
 french-dictionary/*.zip
+.antigravitycli/
 
 # Root artifacts
 /*.json
