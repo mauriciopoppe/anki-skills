@@ -1,6 +1,6 @@
 # Agent System & Project Documentation
 
-Welcome! This file serves as the definitive reference guide for AI Agents operating on the `anki-decks` repository. It consolidates product goals, learning methodologies, code guidelines, tech stack details, and templates.
+Welcome! This file serves as the definitive reference guide for AI Agents operating on the `anki-skills` repository. It consolidates product goals, learning methodologies, code guidelines, tech stack details, and templates.
 
 ---
 

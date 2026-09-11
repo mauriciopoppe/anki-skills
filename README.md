@@ -1,4 +1,4 @@
-# Anki Decks Skills
+# Anki Skills
 
 An ecosystem of **AI Skills** for Anki that automates the creation of high-quality study materials. These tools enable AI agents to enrich your decks with mnemonics, i+1 example sentences, conversational frequency data, and monolingual hints directly through AnkiConnect.
 
@@ -23,7 +23,7 @@ You can install these skills using the `npx skills` CLI. This tool supports over
 To install all skills from this repository:
 
 ```bash
-npx skills add mauriciopoppe/anki-decks
+npx skills add mauriciopoppe/anki-skills
 ```
 
 If you are already inside this repository and want to load them:
