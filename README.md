@@ -48,7 +48,7 @@ Takes a Cloze deletion like `Sur ça, tu touches un point {{c1::assez juste}}` a
 | ![before](./resources/french-explain-before.png) | ![after](./resources/french-explain-after.png) |
 
 **Prompt:**
-> Use anki-add-notes for deck "Language French::My french words and phrases", target field "Notes", and prompt file "./explain_prompt.txt".
+> Use anki-add-notes for deck "Language French::My french words and phrases", target field "Notes", and prompt file "./prompts/explain_prompt.txt".
 
 #### 2. Generate Kanji Mnemonics
 Uses the Kanji and its meaning to create a story that helps you remember the shape and sound.
@@ -58,18 +58,18 @@ Uses the Kanji and its meaning to create a story that helps you remember the sha
 | ![after](./resources/kanji-mnemonic-after.png) |
 
 **Prompt:**
-> Use anki-add-notes for deck "Language Japanese::Mining", target field "Notes", and prompt file "./kanji_mnemonic_prompt.txt".
+> Use anki-add-notes for deck "Language Japanese::Mining", target field "Notes", and prompt file "./prompts/kanji_mnemonic_prompt.txt".
 
 #### 3. Translate Sentences
 Translates a field (like "Expression") into your target language, automatically cleaning Anki cloze markers.
 
 **Prompt:**
-> Use anki-add-notes for deck "Language Hindi::My hindi words and phrases", target field "ExpressionEnglish", and prompt file "./translate_prompt.txt".
+> Use anki-add-notes for deck "Language Hindi::My hindi words and phrases", target field "ExpressionEnglish", and prompt file "./prompts/translate_prompt.txt".
 
 ### Parameters
 - `--deck`: (Required) The Anki Deck Name to process.
 - `--target-field`: (Required) The field you want to fill (e.g., "Notes").
-- `--prompt-file`: (Required) Path to your prompt template. Use `{FieldName}` placeholders to pull data from your cards. See the bundled [Explanation](./explain_prompt.txt), [Kanji](./kanji_mnemonic_prompt.txt), [Translation in English](./translate_prompt.txt), [Translation in Japanese (furigana)](./translate_ja_prompt.txt) templates for examples.
+- `--prompt-file`: (Required) Path to your prompt template. Use `{FieldName}` placeholders to pull data from your cards. See the bundled [Explanation](./prompts/explain_prompt.txt), [Kanji](./prompts/kanji_mnemonic_prompt.txt), [Translation in English](./prompts/translate_prompt.txt), [Translation in Japanese (furigana)](./prompts/translate_ja_prompt.txt) templates for examples.
 - `--limit`: (Optional) Limit the number of notes processed. Defaults to `20`.
 - `--sort-field`: (Optional) The field to use for sorting notes. Defaults to `Frequency`.
 - `--interactive` / `-i`: (Optional) Review every AI response before it hits your deck.
@@ -190,8 +190,8 @@ Full augmentation for new French notes, adding frequency data, detailed explanat
 ```text
 In the deck "Language French::My french words and phrases":
 - use the skill anki-add-frequency.
-- use the skill anki-add-notes with the target field "Notes" and the prompt file "./explain_es_prompt.txt".
-- use the skill anki-add-notes with the target field "ExpressionSpanish" and the prompt file "./translate_es_prompt.txt".
+- use the skill anki-add-notes with the target field "Notes" and the prompt file "./prompts/explain_es_prompt.txt".
+- use the skill anki-add-notes with the target field "ExpressionSpanish" and the prompt file "./prompts/translate_es_prompt.txt".
 - use the skill anki-monolingual-hints.
 
 Process a limit of 200 notes with a batch size of 50. Parallelize where possible. Prefer atomic changes.
@@ -204,7 +204,7 @@ Comprehensive augmentation for Japanese mining notes, adding frequency, mnemonic
 ```text
 In the deck "Language Japanese::Mining":
 - use the skill anki-add-frequency.
-- use the skill anki-add-notes with the target field "Notes", and prompt file "./kanji_mnemonic_prompt.txt".
+- use the skill anki-add-notes with the target field "Notes", and prompt file "./prompts/kanji_mnemonic_prompt.txt".
 - use the skill anki-add-sentence.
 
 Process a limit of 200 notes with a batch size of 50. Parallelize where possible. Prefer atomic changes.
@@ -217,9 +217,9 @@ Full augmentation for new Hindi notes, adding frequency data, detailed grammar/c
 ```text
 In the deck "Language Hindi::My hindi words and phrases":
 - use the skill anki-add-frequency.
-- use the skill anki-add-notes with the target field "Notes" and the prompt file "./explain_prompt.txt".
-- use the skill anki-add-notes with the target field "ExpressionFurigana" and the prompt file "./translate_ja_prompt.txt".
-- use the skill anki-add-notes with the target field "ExpressionEnglish" and the prompt file "./translate_prompt.txt".
+- use the skill anki-add-notes with the target field "Notes" and the prompt file "./prompts/explain_prompt.txt".
+- use the skill anki-add-notes with the target field "ExpressionFurigana" and the prompt file "./prompts/translate_ja_prompt.txt".
+- use the skill anki-add-notes with the target field "ExpressionEnglish" and the prompt file "./prompts/translate_prompt.txt".
 
 Process a limit of 200 notes with a batch size of 50. Parallelize where possible. Prefer atomic changes.
 ```

@@ -96,6 +96,7 @@ When generating content or modifying deck fields, AI agents must adhere to these
 - `resources/`: project documentation images.
 - `anki_backups/`: restorable `.apkg` deck exports.
 - `docs/`: learning programs and supporting documentation.
+- `prompts/`: reusable `{FieldName}` prompt templates consumed by `anki-add-notes`.
 
 ### Deck Mutation Safety
 
