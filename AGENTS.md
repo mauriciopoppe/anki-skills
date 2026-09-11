@@ -71,22 +71,68 @@ When generating content or modifying deck fields, AI agents must adhere to these
 
 ### Core Technologies
 - **Python 3.9+:** The primary programming language for all automation scripts.
-- **LiteLLM:** Used as a unified interface to interact with various LLM providers (Gemini, Ollama, etc.), ensuring flexibility in model selection.
+- **Agent Skills:** Most AI behavior is expressed as procedural `SKILL.md` instructions rather than a provider-specific LLM client.
 - **AnkiConnect:** The bridge for interacting with a running Anki instance via its RESTful API on `http://localhost:8765`.
 
 ### Data and File Handling
-- **requests:** Used for making HTTP requests to the AnkiConnect API.
-- **tqdm:** Used for displaying progress bars during long-running operations like data downloads.
+- **Python standard library:** Scripts use `urllib.request` for HTTP, plus modules such as `json`, `csv`, and `zipfile`; avoid adding dependencies when the standard library is sufficient.
 - **Lexique 3:** Used as the primary linguistic database for French lemmatization.
 
 ### Development and Quality
 - **Ruff:** Fast Python linter and code formatter to ensure code quality and consistency.
-- **Pytest:** Testing framework for verifying script logic and API integrations.
+- **Skill validator:** `tests/validate_skills.py` checks required skill frontmatter and structure.
 - **Pip:** Standard package installer for Python dependencies listed in `requirements.txt`.
 
 ---
 
-## 5. Card Templates & Synchronization
+## 5. Repository Architecture & Operational Invariants
+
+### Repository Map
+
+- `skills/<skill-name>/SKILL.md`: portable, provider-independent workflows for AI agents.
+- `skills/<skill-name>/scripts/`: deterministic helpers used when procedural instructions alone are insufficient.
+- `note-types-templates/`: version-controlled Anki card HTML and CSS, plus synchronization helpers.
+- `french-dictionary/`: pipeline for a Yomitan-compatible French frequency dictionary.
+- `resources/`: project documentation images.
+- `anki_backups/`: restorable `.apkg` deck exports.
+- `docs/`: learning programs and supporting documentation.
+
+### Deck Mutation Safety
+
+- Anki must be running with AnkiConnect available at `http://localhost:8765` for live deck operations.
+- Only process notes whose destination field is empty. Never silently overwrite existing study material.
+- Honor `--dry-run` as a read-only preview and use interactive review when requested.
+- Validate required note fields before generation or mutation; stop clearly when the note type does not match.
+- Prefer AnkiConnect `multi` for batched `updateNoteFields` and `addTags` operations.
+- Back up a deck before broad or difficult-to-reverse changes.
+
+### Generation Invariants
+
+- Sort candidates by the configured frequency field before limiting when a skill prioritizes vocabulary.
+- For i+1 generation, a word is learned when its card interval is greater than zero. Sentences may use learned vocabulary plus exactly one target word.
+- Japanese output uses Anki furigana syntax (`漢字[ふりがな]`), contextual readings, and `<b>` target highlighting where HTML is expected.
+- Prefer natural daily-life language; accuracy and restricted vocabulary take priority over novelty.
+- Respect `--batch-size` and report the intended scope before large runs.
+
+### Development Workflow
+
+1. Read the relevant `SKILL.md`, nearby scripts, and templates before changing behavior.
+2. Make the smallest coherent change and prefer non-interactive commands.
+3. Run relevant checks. At minimum, after modifying skill content:
+
+   ```bash
+   python3 tests/validate_skills.py
+   ruff check <changed Python paths>
+   ```
+
+4. For live Anki integrations, use a dry run first when available, then verify representative notes and field formatting.
+5. Before finishing, confirm functionality, readability, absence of committed secrets, and documentation of changed interfaces.
+
+Historical Conductor plans remain available through Git history, but completed track metadata and Gemini-specific workflow state are not active project instructions.
+
+---
+
+## 6. Card Templates & Synchronization
 
 HTML and CSS templates for various note types are version-controlled in the `note-types-templates/` directory.
 
