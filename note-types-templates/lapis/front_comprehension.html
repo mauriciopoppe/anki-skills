@@ -20,18 +20,15 @@
   <!-------- Audio card ----------->
   {{#IsAudioCard}}
   <div id="front-audio">
-    <div lang="ja" class="front-sentence">{{Sentence}}</div>
+    <div lang="ja" class="front-sentence">
+      {{#Sentence}} {{kanji:Sentence}} {{/Sentence}}
+    </div>
     <div>
       {{#SentenceAudio}}{{SentenceAudio}}{{/SentenceAudio}}
       {{^SentenceAudio}}{{ExpressionAudio}}{{/SentenceAudio}}
     </div>
   </div>
   {{/IsAudioCard}}
-
-  <!-- Hint -->
-  {{#Hint}}
-  <div id="front-hint-field">{{Hint}}</div>
-  {{/Hint}}
 </main>
 
 <script>

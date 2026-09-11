@@ -1,0 +1,52 @@
+{{#SentenceEnglish}}
+<header class="back-header">
+  <div class="back-top-container">
+    {{#Frequency}}{{Frequency}}{{/Frequency}}
+  </div>
+</header>
+
+<main lang="ja" class="front-main" style="width: 100% !important;">
+  <!-- 1. Big Word Space (hidden on front, keeping space) -->
+  <div lang="ja" class="front-vocab production-vocab-front">
+    {{Expression}}
+  </div>
+
+  <!-- 2. English Sentence Prompt (Translation target) -->
+  <div class="production-english" style="font-size: 1.2em; margin-bottom: 30px; line-height: 1.5; color: var(--fg-color); text-align: center;">
+    {{SentenceEnglish}}
+  </div>
+
+  <!-- 3. Dimmed Japanese Sentence (light grey / low opacity, target word replaced with [...]) -->
+  <div lang="ja" class="front-sentence production-sentence-front" style="font-size: var(--front-sentence-font-size); line-height: 1.6; text-align: center; width: 100%;">
+    {{#Sentence}} {{furigana:Sentence}} {{/Sentence}}
+  </div>
+
+  <!-- 4. Target Word Hint (placed below Japanese sentence, matching back layout) -->
+  {{#Hint}}
+  <div id="front-hint-field" style="text-align: center; margin-top: 15px;">Target: {{Hint}}</div>
+  {{/Hint}}
+</main>
+
+<style>
+  /* Reserve big font space for the word on front, but hide it */
+  .production-vocab-front {
+    visibility: hidden;
+  }
+
+  /* Grey out the Japanese sentence on front */
+  .production-sentence-front {
+    color: var(--fg-subtle) !important;
+    opacity: 0.35;
+  }
+</style>
+
+<script>
+  function hideTargetWords() {
+    const targetWords = document.querySelectorAll(".production-sentence-front b");
+    targetWords.forEach((word) => {
+      word.innerText = "[...]";
+    });
+  }
+  hideTargetWords();
+</script>
+{{/SentenceEnglish}}

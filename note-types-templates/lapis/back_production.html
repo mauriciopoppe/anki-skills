@@ -1,0 +1,68 @@
+{{#SentenceEnglish}}
+<header class="back-header">
+  <div class="back-top-container">
+    {{#Frequency}}{{Frequency}}{{/Frequency}}
+  </div>
+</header>
+
+<main lang="ja" class="front-main" style="width: 100% !important;">
+  <!-- 1. Revealed Big Word Header -->
+  <div lang="ja" class="front-vocab production-vocab-back">
+    {{#ExpressionFurigana}}{{furigana:ExpressionFurigana}}{{/ExpressionFurigana}}
+    {{^ExpressionFurigana}}{{Expression}}{{/ExpressionFurigana}}
+  </div>
+
+  <!-- 2. English Sentence Prompt -->
+  <div class="production-english" style="font-size: 1.2em; margin-bottom: 30px; line-height: 1.5; color: var(--fg-color); text-align: center;">
+    {{SentenceEnglish}}
+  </div>
+
+  <!-- 3. Full Japanese Sentence (normal contrast, target word highlighted in blue) -->
+  <div lang="ja" class="front-sentence production-sentence-back" style="font-size: var(--front-sentence-font-size); line-height: 1.6; text-align: center; width: 100%;">
+    {{#Sentence}} {{furigana:Sentence}} {{/Sentence}}
+  </div>
+
+  <!-- 4. Show Hint (matching front template style and label) -->
+  {{#Hint}}
+  <div id="front-hint-field" style="text-align: center; margin-top: 15px;">Target: {{Hint}}</div>
+  {{/Hint}}
+
+  <!-- 5. Show Notes and Meaning below the Hint -->
+  {{#Notes}}
+  <div class="back-notes" style="margin-top: 20px; text-align: left; font-size: 0.9em; border-top: 1px inset var(--bg-inset); padding-top: 15px;">
+    {{Notes}}
+  </div>
+  {{/Notes}}
+
+  {{#MainDefinition}}
+  <div class="back-meaning" style="margin-top: 15px; text-align: left; font-size: 0.9em;">
+    <strong>Meaning:</strong>
+    <div style="margin-top: 5px;">{{MainDefinition}}</div>
+  </div>
+  {{/MainDefinition}}
+
+  {{^MainDefinition}}
+  {{#Glossary}}
+  <div class="back-meaning" style="margin-top: 15px; text-align: left; font-size: 0.9em;">
+    <strong>Meaning:</strong>
+    <div style="margin-top: 5px;">{{Glossary}}</div>
+  </div>
+  {{/Glossary}}
+  {{/MainDefinition}}
+
+  <!-- Hidden Audio elements to trigger automatic pronunciation playback -->
+  <div style="display: none;">{{ExpressionAudio}} {{SentenceAudio}}</div>
+</main>
+
+<style>
+  .production-vocab-back {
+    visibility: visible;
+  }
+
+  /* Highlight the target word in the blue theme color on the back */
+  .production-sentence-back b {
+    color: var(--bold) !important;
+    font-weight: 600;
+  }
+</style>
+{{/SentenceEnglish}}

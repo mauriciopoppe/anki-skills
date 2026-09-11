@@ -143,13 +143,24 @@ To synchronize local files with Anki, use the AnkiConnect API. The following com
 #### A. Japanese::Mining (Lapis Model)
 - **Path:** `note-types-templates/lapis/`
 - **Anki Model:** `Lapis`
-- **Template Name:** `Mining`
+- **Template Names:** `Comprehension` and `Production`
+- **Sync Script:** `note-types-templates/lapis/sync.py`
+
+Run the dedicated Python sync script to automatically handle template renames, template additions, and CSS updates:
+
+```bash
+python3 note-types-templates/lapis/sync.py
+```
+
+Alternatively, synchronize via `curl` & `jq`:
 
 ```bash
 curl -s -X POST http://localhost:8765 -d "$(jq -n \
-  --arg f "$(cat note-types-templates/lapis/front.html)" \
-  --arg b "$(cat note-types-templates/lapis/back.html)" \
-  '{action: "updateModelTemplates", version: 6, params: {model: {name: "Lapis", templates: {Mining: {Front: $f, Back: $b}}}}}')" && \
+  --arg fc "$(cat note-types-templates/lapis/front_comprehension.html)" \
+  --arg bc "$(cat note-types-templates/lapis/back_comprehension.html)" \
+  --arg fp "$(cat note-types-templates/lapis/front_production.html)" \
+  --arg bp "$(cat note-types-templates/lapis/back_production.html)" \
+  '{action: "updateModelTemplates", version: 6, params: {model: {name: "Lapis", templates: {Comprehension: {Front: $fc, Back: $bc}, Production: {Front: $fp, Back: $bp}}}}}')" && \
   curl -s -X POST http://localhost:8765 -d "$(jq -n \
   --arg s "$(cat note-types-templates/lapis/styling.css)" \
   '{action: "updateModelStyling", version: 6, params: {model: {name: "Lapis", css: $s}}}')"

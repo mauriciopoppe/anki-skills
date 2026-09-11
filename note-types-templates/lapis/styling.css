@@ -14,7 +14,7 @@
   /* --- Back Font Sizes --- */
   --back-main-font-size: 18px;
   --back-main-def-size: 14px;
-  --back-vocab-font-size: 4em;
+  --back-vocab-font-size: 5em;
   --back-sentence-font-size: 1.2em;
   --back-info-font-size: 23px;
 
@@ -316,9 +316,9 @@ main {
   gap: min(20px, 2vw);
 }
 .back-dh-left {
-  background: var(--bg-elevated);
-  padding: 0.52em;
-  border-radius: 5px;
+  background: none;
+  padding: 0;
+  border-radius: 0;
   flex: 1;
 }
 .mobile .back-dh-left {
@@ -484,7 +484,6 @@ main {
   font-size: 0.8em;
   line-height: 1.4;
   text-align: left;
-  border-left: 4px solid var(--bold);
 }
 .back-misc-info {
   font-family: var(--font-sans);
