@@ -156,6 +156,29 @@ Backup an Anki deck to a single `.apkg` binary file. Use this before making sign
 
 ---
 
+## Skill: `anki-practice-session`
+
+Generates a personalized AI tutor prompt from your Anki progress. The prompt
+includes vocabulary from learned cards and the next words in your queue, then
+instructs the model to run interactive exercises using that vocabulary.
+
+### Example
+
+**Prompt:**
+> Use anki-practice-session for deck "Language Japanese::Mining". Include up to 1000 learned words and the next 10 words, and write the prompt to "practice_prompt.md".
+
+Use the generated prompt with your preferred model or agent harness to begin
+the practice session.
+
+### Parameters
+- `--deck`: (Required) The Anki Deck Name to process.
+- `--limit-learned`: (Optional) Maximum learned words to include. Defaults to `1000`.
+- `--limit-next`: (Optional) Maximum upcoming words to practice. Defaults to `10`.
+- `--output`: (Optional) Path for the generated prompt. Defaults to `practice_prompt.md`.
+- `--dry-run`: (Optional) Preview the learned and upcoming vocabulary without writing a prompt.
+
+---
+
 ## Meta Prompts
 
 Meta prompts combine multiple skills into a single powerful workflow. These are useful for processing large batches of new notes across multiple dimensions (frequency, explanations, and translations).
@@ -221,4 +244,3 @@ python3 tests/validate_skills.py
 ```
 
 License: MIT
-
