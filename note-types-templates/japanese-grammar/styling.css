@@ -5,6 +5,12 @@
   --grammar-accent: #3f6f9f;
   --grammar-panel: #ffffff;
   --grammar-border: #deded9;
+  --grammar-inset: rgba(0, 0, 0, 0.06);
+  --font-serif: "Noto Sans JP", "Hiragino Maru Gothic ProN", "Yu Mincho",
+    HanaMinA, HanaMinB, serif;
+  --font-sans: "Inter", "SF Pro Display", "Liberation Sans", "Segoe UI",
+    "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Meiryo", HanaMinA,
+    HanaMinB, sans-serif;
 }
 
 .card {
@@ -13,7 +19,7 @@
   padding: 24px;
   background: var(--grammar-bg);
   color: var(--grammar-fg);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-serif);
   text-align: center;
 }
 
@@ -23,13 +29,14 @@
 }
 
 .sentence-english {
+  font-family: var(--font-sans);
   margin-bottom: 28px;
   font-size: 1.15rem;
   line-height: 1.5;
 }
 
 .sentence-japanese {
-  font-family: "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  font-family: var(--font-serif);
   font-size: clamp(1.65rem, 6vw, 2.35rem);
   line-height: 2;
 }
@@ -38,12 +45,22 @@
   font-size: 0.48em;
 }
 
+.grammar-card-front .sentence-japanese {
+  color: var(--grammar-muted);
+  opacity: 0.35;
+}
+
+.grammar-card-front .cloze {
+  color: inherit;
+}
+
 .cloze {
   color: var(--grammar-accent);
   font-weight: 700;
 }
 
 .cue {
+  font-family: var(--font-sans);
   display: inline-block;
   margin-top: 26px;
   padding: 8px 12px;
@@ -54,9 +71,9 @@
 }
 
 .answer-details {
+  font-family: var(--font-sans);
   margin-top: 28px;
   padding: 18px;
-  border: 1px solid var(--grammar-border);
   border-radius: 10px;
   background: var(--grammar-panel);
   text-align: left;
@@ -71,19 +88,30 @@
 }
 
 .reading,
-.classification,
-.notes {
+.classification {
   color: var(--grammar-muted);
 }
 
 .classification,
-.explanation,
-.notes {
+.explanation {
   margin-top: 10px;
   line-height: 1.45;
 }
 
+.notes {
+  font-family: var(--font-sans);
+  background: var(--grammar-inset);
+  color: var(--grammar-fg);
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px auto;
+  font-size: 0.8em;
+  line-height: 1.4;
+  text-align: left;
+}
+
 .audio {
+  font-family: var(--font-sans);
   margin-top: 20px;
 }
 
@@ -94,5 +122,6 @@
   --grammar-accent: #8ab4f8;
   --grammar-panel: #292a2d;
   --grammar-border: #45464a;
+  --grammar-inset: rgba(255, 255, 255, 0.03);
 }
 

@@ -15,6 +15,9 @@
     {{#Notes}}<div class="notes">{{Notes}}</div>{{/Notes}}
   </section>
 
+  {{#NativeTTS}}<div class="audio native-tts">{{tts ja_JP voices=O-ren_(Enhanced),O-ren,Apple_O-ren_(Enhanced),Apple_O-ren,Siri,Apple_Siri,Kyoko_(Enhanced),Kyoko,Apple_Kyoko_(Enhanced),Apple_Kyoko:Sentence}}</div>{{/NativeTTS}}
+  {{^NativeTTS}}
   {{#SentenceAudio}}<div class="audio">{{SentenceAudio}}</div>{{/SentenceAudio}}
+  {{/NativeTTS}}
 </main>
 
