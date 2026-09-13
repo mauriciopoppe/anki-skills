@@ -1,0 +1,4 @@
+interface:
+  display_name: "Anki Add Audio"
+  short_description: "Generate local TTS audio for Anki notes"
+  default_prompt: "Use $anki-add-audio to fill empty sentence audio fields in my Anki deck."

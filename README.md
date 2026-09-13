@@ -145,6 +145,29 @@ Estimates how common a word or phrase is in a conversational setting (scale 1-10
 
 ---
 
+## Skill: `anki-add-audio`
+
+Generates MP3 audio locally on macOS with a system voice and FFmpeg, stores it in Anki media, and fills only empty audio fields.
+
+**Prompt:**
+> Use anki-add-audio for deck "Language Japanese::Grammar", reading from "Sentence" and writing to "SentenceAudio" with voice "Kyoko".
+
+Run a preview from the repository root:
+
+```bash
+python3 skills/anki-add-audio/scripts/anki_add_audio.py \
+  --deck "Language Japanese::Grammar" \
+  --source-field Sentence \
+  --target-field SentenceAudio \
+  --voice Kyoko \
+  --limit 3 \
+  --dry-run
+```
+
+After reviewing the preview, remove `--dry-run` to generate and attach audio.
+
+---
+
 ## Skill: `anki-backup-deck`
 
 Backup an Anki deck to a single `.apkg` binary file. Use this before making significant changes to your deck.

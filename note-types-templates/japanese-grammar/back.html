@@ -1,0 +1,20 @@
+<main class="grammar-card" lang="ja">
+  <div class="sentence-english">{{SentenceEnglish}}</div>
+  <div class="sentence-japanese">{{furigana:cloze:SentenceFurigana}}</div>
+
+  <section class="answer-details">
+    <div class="transformation">
+      <span>{{Target}}</span>
+      <span aria-hidden="true">→</span>
+      <strong>{{Answer}}</strong>
+      {{#AnswerReading}}<span class="reading">（{{AnswerReading}}）</span>{{/AnswerReading}}
+    </div>
+
+    {{#TargetClass}}<div class="classification">{{TargetClass}}</div>{{/TargetClass}}
+    {{#Explanation}}<div class="explanation">{{Explanation}}</div>{{/Explanation}}
+    {{#Notes}}<div class="notes">{{Notes}}</div>{{/Notes}}
+  </section>
+
+  {{#SentenceAudio}}<div class="audio">{{SentenceAudio}}</div>{{/SentenceAudio}}
+</main>
+
