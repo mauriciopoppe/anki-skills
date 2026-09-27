@@ -97,6 +97,7 @@ When generating content or modifying deck fields, AI agents must adhere to these
 - `anki_backups/`: restorable `.apkg` deck exports.
 - `docs/`: learning programs and supporting documentation.
 - `prompts/`: reusable `{FieldName}` prompt templates consumed by `anki-add-notes`.
+- `config/`: portable configuration examples and optional ignored local collection context.
 
 ### Deck Mutation Safety
 
@@ -106,6 +107,15 @@ When generating content or modifying deck fields, AI agents must adhere to these
 - Validate required note fields before generation or mutation; stop clearly when the note type does not match.
 - Prefer AnkiConnect `multi` for batched `updateNoteFields` and `addTags` operations.
 - Back up a deck before broad or difficult-to-reverse changes.
+
+### Deck Configuration
+
+Keep skills deck-agnostic. Accept deck names, models, and fields as parameters
+and use AnkiConnect to verify them at runtime. When working repeatedly with one
+collection, agents should inspect the live collection rather than relying on
+collection-specific files. If `config/anki-profile.local.md` exists, read it
+for durable semantic context, then verify all mutable facts through AnkiConnect
+before acting.
 
 ### Generation Invariants
 

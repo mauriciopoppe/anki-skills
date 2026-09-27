@@ -12,6 +12,14 @@ To verify your setup, run this command in your terminal:
 curl -s -X POST http://localhost:8765 -d '{"action": "version", "version": 6}'
 ```
 
+### Optional local collection context
+
+If this repository is used repeatedly with one Anki collection, an agent may
+read `config/anki-profile.local.md` when it exists. The ignored file records
+durable deck roles, relationships, and study preferences. It is advisory
+context only; live AnkiConnect queries remain the source of truth for mutable
+facts. See `config/README.md` for the convention and an example.
+
 ## How it Works
 
 These skills are stored in the `skills/` directory. They follow the [Agent Skills](https://github.com/vercel-labs/skills) specification, making them portable and easy to install in any project.

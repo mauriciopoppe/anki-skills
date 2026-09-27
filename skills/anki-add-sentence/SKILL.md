@@ -27,8 +27,11 @@ To generate sentences for an Anki deck, follow these steps:
 
 ### 1. Identify Learned Vocabulary
 Before generating any sentences, you must know what the user has already learned.
-1. Run the `scripts/extract_learned_vocab.py` script.
+1. Run `scripts/extract_learned_vocab.py --deck "<deck-name>" --source-field "<field-name>"` for the target deck. Repeat both options for any additional learned-vocabulary decks.
 2. Capture the `stdout` output as the list of learned words.
+
+The deck name and source field come from the current AnkiConnect inspection;
+there is no repository-specific deck configuration to keep in sync.
 
 ### 2. Fetch and Filter Notes (Strictly Empty Target)
 Query AnkiConnect for notes in the specified `--deck` where the `--target-field` is **unset (empty)**.
