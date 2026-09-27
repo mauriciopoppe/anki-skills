@@ -183,7 +183,7 @@ Backup an Anki deck to a single `.apkg` binary file. Use this before making sign
 ### Example
 
 **Prompt:**
-> Use anki-backup-deck to backup the "Language French::My french words and phrases" deck to anki_backups/.
+> Use anki-backup-deck to backup the "Language French::My french words and phrases" deck to "<backup-directory>".
 
 ---
 

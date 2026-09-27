@@ -76,7 +76,6 @@ When generating content or modifying deck fields, AI agents must adhere to these
 
 ### Data and File Handling
 - **Python standard library:** Scripts use `urllib.request` for HTTP, plus modules such as `json`, `csv`, and `zipfile`; avoid adding dependencies when the standard library is sufficient.
-- **Lexique 3:** Used as the primary linguistic database for French lemmatization.
 
 ### Development and Quality
 - **Ruff:** Fast Python linter and code formatter to ensure code quality and consistency.
@@ -92,9 +91,7 @@ When generating content or modifying deck fields, AI agents must adhere to these
 - `skills/<skill-name>/SKILL.md`: portable, provider-independent workflows for AI agents.
 - `skills/<skill-name>/scripts/`: deterministic helpers used when procedural instructions alone are insufficient.
 - `note-types-templates/`: version-controlled Anki card HTML and CSS, plus synchronization helpers.
-- `french-dictionary/`: pipeline for a Yomitan-compatible French frequency dictionary.
 - `resources/`: project documentation images.
-- `anki_backups/`: restorable `.apkg` deck exports.
 - `docs/`: learning programs and supporting documentation.
 - `prompts/`: reusable `{FieldName}` prompt templates consumed by `anki-add-notes`.
 - `config/`: portable configuration examples and optional ignored local collection context.
