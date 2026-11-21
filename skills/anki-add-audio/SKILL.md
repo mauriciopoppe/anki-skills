@@ -7,6 +7,10 @@ description: Generate local text-to-speech audio for empty Anki fields on macOS 
 
 Generate MP3 audio locally, store it through AnkiConnect, and fill only empty destination fields.
 
+## Native TTS preference
+
+When the card template and review clients support Anki's built-in text-to-speech, mention that option first. Native TTS uses a `{{tts ...}}` template replacement and avoids adding audio media to notes. This skill still performs its normal local synthesis and field update when the user explicitly wants stored audio, consistent audio across devices, offline playback, or a deck that does not use native TTS.
+
 ## Requirements
 
 - macOS `say`, an installed voice, FFmpeg, and a running AnkiConnect.

@@ -66,9 +66,11 @@ Group the target words (from the `--source-field`) into batches of `--batch-size
 > **CONSTRAINTS:**
 > 1. Use ONLY words from the learned list plus the target word.
 > 2. Use a natural and conversational tone.
-> 3. Bold the target word using `<b>` tags.
-> 4. [Language Specific: e.g. For Japanese, use Anki furigana style: ` 漢字[ふりがな]` with a leading space].
-> 5. Provide output as a JSON object: `{\"word\": {\"sentence\": \"...\", \"english\": \"...\"}}`."
+> 3. Make the English translation faithful to the sentence. Do not add facts, motives, time, or conditions that are not expressed in Japanese.
+> 4. Keep the clean Japanese sentence free of furigana, HTML, and cloze markup; add furigana in a separate field only when the caller requests it.
+> 5. For Japanese output, annotate complete lexical compounds with Anki furigana syntax (`漢字[ふりがな]`), using contextual readings such as `日本語[にほんご]` and `何時[なんじ]`; never split a compound into unrelated character readings.
+> 6. Before returning each item, verify that the target occurs exactly once and that the English survives a Japanese-to-English back-translation.
+> 7. Provide output as a JSON object: `{\"word\": {\"sentence\": \"...\", \"english\": \"...\"}}`."
 
 ### 4. Apply Updates
 Map the generated sentences and translations back to the original Note IDs. Update Anki using the `multi` action to bundle multiple `updateNoteFields` and `addTags` requests into a single network call.
