@@ -10,44 +10,45 @@ Inputs:
 ## Requirements
 
 1. Keep the note to **1–2 short lines** (roughly 25–35 words total) so it is scannable during fast reviews.
-2. Do **not** repeat the dictionary definition on a separate line—the card already shows the meaning.
-3. If `{Expression}` contains kanji, include both `Kanji:` and `Hook:`. Break down only the hardest or most memorable kanji using **Component (char)** in bold, followed by a vivid 1-line visual image.
-4. If `{Expression}` is kana-only, omit `Kanji:` and output only `Hook:`.
-5. For `Hook:`, use whichever anchor is strongest—a Japanese rhyme/contrast (e.g., **なつ** ↔ **あつい**), an etymological link, or a punchy sound-alike. Always bold the hiragana reading (e.g., **たべる**).
-6. Use standard Markdown (`**bold**`). Output ONLY the note content, with no preamble.
+2. Do **not** include labels/prefixes like `Kanji:`, `Hook:`, `Meaning:`, `Shape:`, or `Story:`.
+3. Do **not** repeat the dictionary definition on a separate line—the card already shows the meaning.
+4. If `{Expression}` contains kanji, write a 1-line visual breakdown first using **Component (char)** in bold, followed by a vivid image, then a 1-line sound/memory hook on the second line.
+5. If `{Expression}` is kana-only, output only the 1-line sound/memory hook.
+6. For the hook line, use whichever anchor is strongest—a Japanese rhyme/contrast (e.g., **なつ** ↔ **あつい**), an etymological link, or a punchy sound-alike. Always bold the hiragana reading (e.g., **たべる**).
+7. Use standard Markdown (`**bold**`). Output ONLY the note content, with no preamble.
 
 ## Output Format
 
 Kanji word:
 
 ```markdown
-**Kanji:** [Character] = **[Component] (char)** + **[Component] (char)** → [vivid 1-line image]
-**Hook:** [1-line sound hook, rhyme, or contrast with **reading** bolded]
+[Character] = **[Component] (char)** + **[Component] (char)** → [vivid 1-line image]
+[1-line sound hook, rhyme, or contrast with **reading** bolded]
 ```
 
 Kana-only word:
 
 ```markdown
-**Hook:** [1-line sound hook, rhyme, or contrast with **reading** bolded]
+[1-line sound hook, rhyme, or contrast with **reading** bolded]
 ```
 
 ## Examples
 
 Input: `秋` (`あき`)
 Output:
-**Kanji:** 秋 = **grain (禾)** + **fire (火)** → fiery red autumn leaves & harvest.
-**Hook:** **あき** (*a-key*) — the key harvest season.
+秋 = **grain (禾)** + **fire (火)** → fiery red autumn leaves & harvest.
+**あき** (*a-key*) — the key harvest season.
 
 Input: `夏` (`なつ`)
 Output:
-**Kanji:** 夏 = a person walking slowly under the blazing **summer** sun.
-**Hook:** **なつ** rhymes with **あつい** (暑い, hot).
+夏 = a person walking slowly under the blazing **summer** sun.
+**なつ** rhymes with **あつい** (暑い, hot).
 
 Input: `食べる` (`たべる`)
 Output:
-**Kanji:** 食 = **roof (人)** + **good (良)** → sitting under a roof for a good meal.
-**Hook:** You sit at a **table** (**たべる**) to eat.
+食 = **roof (人)** + **good (良)** → sitting under a roof for a good meal.
+You sit at a **table** (**たべる**) to eat.
 
 Input: `さっと` (`さっと`)
 Output:
-**Hook:** A rabbit **sat** (**さっと**) and vanished in a flash.
+A rabbit **sat** (**さっと**) and vanished in a flash.
