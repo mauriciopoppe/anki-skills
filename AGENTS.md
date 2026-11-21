@@ -90,7 +90,8 @@ When generating content or modifying deck fields, AI agents must adhere to these
 
 - `skills/<skill-name>/SKILL.md`: portable, provider-independent workflows for AI agents.
 - `skills/<skill-name>/scripts/`: deterministic helpers used when procedural instructions alone are insufficient.
-- `note-types-templates/`: version-controlled Anki card HTML and CSS, plus synchronization helpers.
+- `note-types-templates/<note-type>/`: generic, deck-agnostic Anki card HTML, CSS, sync scripts, and a `README.md` documenting the model's field schema and layout.
+- `decks/<deck-archetype>/`: portable deck playbooks (`README.md`) defining which note type, prompts, skills, tag conventions, and card-creation checklists apply to a deck.
 - `resources/`: project documentation images.
 - `docs/`: learning programs and supporting documentation.
 - `prompts/`: reusable `{FieldName}` prompt templates consumed by `anki-add-notes`.
@@ -124,7 +125,10 @@ before acting.
 
 ### Development Workflow
 
-1. Read the relevant `SKILL.md`, nearby scripts, and templates before changing behavior.
+1. Read the relevant `SKILL.md`, nearby scripts, and documentation before acting:
+   - Editing templates/CSS → read `note-types-templates/<note-type>/README.md`.
+   - Creating or augmenting cards in a deck → read `decks/<deck-archetype>/README.md` **and** its linked `note-types-templates/<note-type>/README.md`.
+   - Resolving live deck names or study progress → read `config/anki-profile.local.md` (if present) and verify via AnkiConnect.
 2. Make the smallest coherent change and prefer non-interactive commands.
 3. Run relevant checks. At minimum, after modifying skill content:
 
@@ -140,9 +144,19 @@ Historical Conductor plans remain available through Git history, but completed t
 
 ---
 
-## 6. Card Templates & Synchronization
+## 6. Note Types, Decks & Synchronization
 
-HTML and CSS templates for various note types are version-controlled in the `note-types-templates/` directory.
+This repository separates **note types** (generic schema and presentation) from **decks** (content rules and workflows):
+
+- **Note types (`note-types-templates/<note-type>/README.md`):** field schema, card layout, markup rules, and AnkiConnect sync commands.
+  - `note-types-templates/japanese-grammar/README.md` (`Japanese Grammar Production`)
+  - `note-types-templates/lapis/README.md` (`Lapis`)
+  - `note-types-templates/my-cloze/README.md` (`My Cloze` — shared across multiple language decks)
+- **Deck playbooks (`decks/<deck-archetype>/README.md`):** which note type, prompts, skills, tags, and card-creation checklists apply to each deck.
+  - `decks/japanese-grammar/README.md`
+  - `decks/japanese-mining/README.md`
+  - `decks/french-cloze/README.md`
+  - `decks/hindi-cloze/README.md`
 
 ### Syncing Templates to Anki via AnkiConnect
 
@@ -150,6 +164,7 @@ To synchronize local files with Anki, use the AnkiConnect API. The following com
 
 #### A. Japanese::Mining (Lapis Model)
 - **Path:** `note-types-templates/lapis/`
+- **Reference:** `note-types-templates/lapis/README.md`
 - **Anki Model:** `Lapis`
 - **Template Names:** `Comprehension` and `Production`
 - **Sync Script:** `note-types-templates/lapis/sync.py`
@@ -176,6 +191,7 @@ curl -s -X POST http://localhost:8765 -d "$(jq -n \
 
 #### B. My Cloze Model
 - **Path:** `note-types-templates/my-cloze/`
+- **Reference:** `note-types-templates/my-cloze/README.md`
 - **Anki Model:** `My Cloze`
 - **Template Name:** `Cloze`
 
@@ -187,4 +203,15 @@ curl -s -X POST http://localhost:8765 -d "$(jq -n \
   curl -s -X POST http://localhost:8765 -d "$(jq -n \
   --arg s "$(cat note-types-templates/my-cloze/styling.css)" \
   '{action: "updateModelStyling", version: 6, params: {model: {name: "My Cloze", css: $s}}}')"
+```
+
+#### C. Japanese::Grammar (Japanese Grammar Production Model)
+- **Path:** `note-types-templates/japanese-grammar/`
+- **Reference:** `note-types-templates/japanese-grammar/README.md`
+- **Anki Model:** `Japanese Grammar Production`
+- **Template Name:** `Grammar Production`
+- **Sync Script:** `note-types-templates/japanese-grammar/sync.py`
+
+```bash
+python3 note-types-templates/japanese-grammar/sync.py
 ```
