@@ -51,7 +51,13 @@
 }
 
 .grammar-card-front .sentence-japanese ruby rt {
-  opacity: 0.35;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.grammar-card-front .sentence-japanese:hover ruby rt,
+.grammar-card-front .sentence-japanese:active ruby rt {
+  opacity: 0.6;
 }
 
 .grammar-card-front .cloze {

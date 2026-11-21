@@ -14,7 +14,7 @@ python3 note-types-templates/japanese-grammar/sync.py
 
 ## Card Layout
 
-- **Front:** `SentenceEnglish` → dimmed `SentenceFurigana` (with `c1` cloze) → `Cue`
+- **Front:** `SentenceEnglish` → dimmed `SentenceFurigana` (with `c1` cloze; furigana `<rt>` hidden by default, hover/tap to peek) → `Cue`
 - **Back:** `SentenceEnglish` → revealed `SentenceFurigana` → transparent `.answer-details` section:
   1. `Lesson · GrammarPoint` (muted header; deduplicates automatically when identical)
   2. `Explanation`
