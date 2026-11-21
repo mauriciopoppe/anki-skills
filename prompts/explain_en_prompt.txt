@@ -14,5 +14,4 @@ Provide a concise but helpful explanation suitable for the "Notes" field.
 ## Example
 
 Input: `{{c1::Kal::Tomorrow}} phir se ek naya din hoga.`
-Output: `Kal means "tomorrow" or "yesterday." The future verb hoga (will be) confirms it means "tomorrow." Phir se means
-"again" and naya is "new."`
+Output: `Kal means "tomorrow" or "yesterday." The future verb hoga (will be) confirms it means "tomorrow." Phir se means "again" and naya is "new."`

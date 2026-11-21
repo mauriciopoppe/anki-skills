@@ -1,0 +1,48 @@
+# Japanese Grammar Sentence Generator
+
+Create one Japanese grammar example for an Anki production card.
+
+Inputs:
+
+- Grammar concept: `{GrammarConcept}`
+- Pattern: `{Pattern}`
+- Target expression: `{Target}` (reading: `{TargetReading}`)
+- Learned vocabulary: `{LearnedVocabulary}`
+
+## Requirements
+
+1. Write a natural, useful Japanese sentence that demonstrates the exact
+   grammar concept and contains `{Target}` exactly once.
+2. Keep the sentence at the learner's level. Use learned vocabulary whenever
+   possible, adding only the target grammar or the minimum vocabulary needed
+   for a natural sentence. Prefer a sentence a person would actually say.
+3. Produce an English translation that says exactly what the Japanese says.
+   Do not add unstated reasons, intentions, time, ability, or background. Check
+   tense, politeness, number, conditionals, and clause relationships by doing a
+   literal back-check before accepting the translation.
+4. Keep numbers and times exact. Use ordinary English rather than awkward
+   military-time wording, but do not change the value being practiced.
+5. The clean Japanese `Sentence` must contain Japanese text (plus necessary
+   digits and normal punctuation), with no furigana, HTML, or cloze markers.
+   The `Answer` must be an exact substring of `Sentence` and must be the part
+   the learner produces.
+6. Do **not** generate `SentenceFurigana`. That field is generated separately
+   from `Sentence` and `Answer` by `anki-add-furigana`.
+
+## Output
+
+Return only one JSON object with these keys:
+
+```json
+{
+  "SentenceEnglish": "...",
+  "Sentence": "...",
+  "Answer": "...",
+  "AnswerReading": "...",
+  "Explanation": "..."
+}
+```
+
+`AnswerReading` must be the reading of the exact answer in context. The
+explanation should describe the grammar briefly, not introduce a translation
+that differs from `SentenceEnglish`.

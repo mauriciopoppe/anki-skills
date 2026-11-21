@@ -1,0 +1,51 @@
+# Japanese Grammar Kanji Quick Memory Hook
+
+Create a concise kanji/reading memory hook for the "Notes" field of an Anki Japanese grammar production card.
+
+Inputs:
+
+- Target: `{Target}` (reading: `{TargetReading}`)
+- Answer: `{Answer}` (reading: `{AnswerReading}`)
+- Sentence: `{Sentence}`
+- English: `{SentenceEnglish}`
+
+## Requirements
+
+1. Keep the note to **1–2 short lines** (roughly 25–35 words total) so it stays fast to scan during grammar reviews.
+2. Focus on the **single trickiest kanji or irregular reading** in `{Target}` or `{Answer}` (or in `{Sentence}` if the target is purely grammatical). Do not repeat the full English translation or grammar rule already covered in `Explanation`.
+3. If the target/answer contains kanji, include both `Kanji:` and `Hook:`. Break down the kanji using **Component (char)** in bold, followed by a vivid 1-line visual image.
+4. If the focus is kana-only (e.g., a particle or irregular kana pattern), omit `Kanji:` and output only `Hook:`.
+5. For `Hook:`, use whichever anchor is strongest—a Japanese rhyme/contrast (e.g., **なつ** ↔ **あつい**), an etymological link, or a punchy sound-alike. Always bold the hiragana reading (e.g., **あき**).
+6. Use standard Markdown (`**bold**`). Output ONLY the note content, with no preamble.
+
+## Output Format
+
+Kanji focus:
+
+```markdown
+**Kanji:** [Character] = **[Component] (char)** + **[Component] (char)** → [vivid 1-line image]
+**Hook:** [1-line sound hook, rhyme, or contrast with **reading** bolded]
+```
+
+Kana focus:
+
+```markdown
+**Hook:** [1-line sound hook, rhyme, or contrast with **reading** bolded]
+```
+
+## Examples
+
+Input: Target `秋` (`あき`), Sentence `秋に電車で京都へ行きます。`
+Output:
+**Kanji:** 秋 = **grain (禾)** + **fire (火)** → fiery red autumn leaves & harvest.
+**Hook:** **あき** (*a-key*) — the key harvest season.
+
+Input: Target `夏` (`なつ`), Sentence `日本の夏はとても暑いです。`
+Output:
+**Kanji:** 夏 = a person walking slowly under the blazing **summer** sun.
+**Hook:** **なつ** rhymes with **あつい** (暑い, hot).
+
+Input: Target `冬` (`ふゆ`), Sentence `北海道の冬はとても寒いです。`
+Output:
+**Kanji:** 冬 = **ice drops (冫)** at the bottom → freezing winter cold.
+**Hook:** **ふゆ** sounds like cold wind blowing (*fū!*).

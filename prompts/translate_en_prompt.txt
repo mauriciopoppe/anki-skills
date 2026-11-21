@@ -1,0 +1,14 @@
+Translate the following Anki card field into natural English.
+
+Input: "{Expression}"
+
+### INSTRUCTIONS
+1. **Normalization**: If the input contains Anki cloze deletion markers (e.g., {{c1::word::hint}} or {{c1::word}}), remove the markers and hints, keeping only the target word/phrase.
+2. **Meaning first**: Translate what the source actually says, preserving its tense, politeness, number, modality, and who did what. Do not add unstated context, motivations, certainty, or time references to make the English sound smoother.
+3. **Natural English**: Use idiomatic English when it preserves the same meaning. For times and numbers, keep exact values (for example, `14:00` may be rendered as `2:00 p.m.` only when the number itself is not the learning target).
+4. **Final audit**: Compare the English back to the normalized source. If a detail in the English cannot be pointed to in the source, remove it or choose a closer translation.
+5. **Output**: Provide ONLY the English translation. No preamble, no quotes, no explanations.
+
+### Examples
+- Input: `{{c1::Shubh::Good}} ratri!` -> Output: `Good night!`
+- Input: `Sur ça, tu touches un point {{c1::assez juste}}` -> Output: `On that, you hit a very fair point.`

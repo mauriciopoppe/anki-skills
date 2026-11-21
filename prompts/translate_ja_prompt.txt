@@ -4,9 +4,11 @@ Input: "{Expression}"
 
 ### INSTRUCTIONS
 1. **Normalization**: If the input contains Anki cloze deletion markers (e.g., {{c1::word::hint}} or {{c1::word}}), remove the markers and hints, keeping only the target word/phrase.
-2. **Translation**: Translate the entire normalized sentence or phrase into natural Japanese.
-3. **Furigana**: Use Anki furigana style for Kanji: ` 漢字[ふりがな]` with a leading space before the Kanji.
-4. **Output**: Provide ONLY the Japanese translation. No preamble, no quotes, no explanations.
+2. **Meaning first**: Translate the entire normalized input into natural Japanese without adding or omitting information. Preserve tense, politeness, number, modality, and the relationship between clauses.
+3. **Context check**: Prefer ordinary learner-friendly wording. Make the Japanese say exactly what the English says; do not turn an implied purpose into a noun modifier or invent a condition that is not in the input.
+4. **Furigana**: Annotate every kanji-bearing lexical unit with Anki syntax such as ` 日本語[にほんご]`. Use the contextual reading, not an isolated character reading (`何時[なんじ]`, `明日[あした]`, `私[わたし]`). Keep compounds together (`図書館[としょかん]`, not `図書[としょ] 館[かん]`) and do not split a compound merely to annotate each character. Add spaces only between lexical units; never put spaces inside a compound.
+5. **Final audit**: Remove the furigana mentally and verify that the Japanese still matches the input word-for-word in meaning. Check that every reading covers the kanji immediately before its brackets and that no reading is missing or attached to the wrong characters.
+6. **Output**: Provide ONLY the Japanese translation. No preamble, no quotes, no explanations.
 
 ### Examples
 - Input: `{{c1::Shubh::Good}} ratri!` -> Output: `おやすみなさい！`
