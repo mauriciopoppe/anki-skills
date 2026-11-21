@@ -72,8 +72,8 @@ POC_NOTES = [
         "SentenceEnglish": "I watch television every day.",
         "Sentence": "毎日、テレビを見ます。",
         "SentenceFurigana": (
-            " 毎日[まいにち]、テレビを"
-            "{{c1:: 見[み]ます}}。"
+            " 毎日[まいにち]、 テレビを "
+            "{{c1::見[み]ます}}。"
         ),
         "Cue": "見る → polite nonpast",
         "Target": "見る",
@@ -95,8 +95,8 @@ POC_NOTES = [
         "SentenceEnglish": "I read a Japanese book every day.",
         "Sentence": "毎日、日本語の本を読みます。",
         "SentenceFurigana": (
-            " 毎日[まいにち]、 日本語[にほんご]の 本[ほん]を"
-            "{{c1:: 読[よ]みます}}。"
+            " 毎日[まいにち]、 日本語[にほんご]の 本[ほん]を "
+            "{{c1::読[よ]みます}}。"
         ),
         "Cue": "読む → polite nonpast",
         "Target": "読む",
@@ -118,8 +118,8 @@ POC_NOTES = [
         "SentenceEnglish": "I study Japanese every day.",
         "Sentence": "毎日、日本語を勉強します。",
         "SentenceFurigana": (
-            " 毎日[まいにち]、 日本語[にほんご]を"
-            "{{c1:: 勉強[べんきょう]します}}。"
+            " 毎日[まいにち]、 日本語[にほんご]を "
+            "{{c1::勉強[べんきょう]します}}。"
         ),
         "Cue": "勉強する → polite nonpast",
         "Target": "勉強する",
@@ -137,7 +137,7 @@ POC_NOTES = [
 
 
 TTS_SAMPLE_NOTE = {
-    "SentenceFurigana": "毎朝[まいあさ]、{{c1::七時[しちじ]に起[お]きます}}。",
+    "SentenceFurigana": "毎朝[まいあさ]、 {{c1::七時[しちじ]に起[お]きます}}。",
     "Lesson": "Native TTS Trial",
     "Sequence": "128",
     "GrammarPoint": "Native Anki text-to-speech",
@@ -163,6 +163,14 @@ def normalize_fields(fields):
     """Add optional model fields when loading older note datasets."""
     fields.setdefault("NativeTTS", "1")
     return fields
+
+
+def validate_cloze_markup(value, source):
+    """Accept repeated c1 spans used to hide ruby text and answer kana."""
+    openings = value.count("{{c1::")
+    closings = value.count("}}")
+    if openings < 1 or openings != closings:
+        raise RuntimeError(f"Invalid c1 cloze markup: {source}")
 
 
 def invoke(action, **params):
@@ -291,8 +299,7 @@ def validate_poc_notes():
         if fields["Source"] in sources:
             raise RuntimeError(f"Duplicate Source: {fields['Source']}")
         sources.add(fields["Source"])
-        if fields["SentenceFurigana"].count("{{c1::") != 1:
-            raise RuntimeError(f"Expected one c1 cloze: {fields['Source']}")
+        validate_cloze_markup(fields["SentenceFurigana"], fields["Source"])
         if fields["Answer"] not in fields["Sentence"]:
             raise RuntimeError(f"Answer missing from Sentence: {fields['Source']}")
 
@@ -307,8 +314,7 @@ def validate_counting_notes(notes):
         if fields["Source"] in sources:
             raise RuntimeError(f"Duplicate Source: {fields['Source']}")
         sources.add(fields["Source"])
-        if fields["SentenceFurigana"].count("{{c1::") != 1:
-            raise RuntimeError(f"Expected one c1 cloze: {fields['Source']}")
+        validate_cloze_markup(fields["SentenceFurigana"], fields["Source"])
         if fields["Target"] not in fields["Sentence"]:
             raise RuntimeError(f"Target missing from Sentence: {fields['Source']}")
         if fields["Answer"] != fields["Target"]:
@@ -412,8 +418,7 @@ def validate_n5_core_notes(notes):
         if fields["Source"] in sources:
             raise RuntimeError(f"Duplicate Source: {fields['Source']}")
         sources.add(fields["Source"])
-        if fields["SentenceFurigana"].count("{{c1::") != 1:
-            raise RuntimeError(f"Expected one c1 cloze: {fields['Source']}")
+        validate_cloze_markup(fields["SentenceFurigana"], fields["Source"])
         if fields["Answer"] not in fields["Sentence"]:
             raise RuntimeError(f"Answer missing from Sentence: {fields['Source']}")
 

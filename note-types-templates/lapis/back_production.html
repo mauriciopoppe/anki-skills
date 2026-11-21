@@ -1,9 +1,4 @@
 {{#SentenceEnglish}}
-<header class="back-header">
-  <div class="back-top-container">
-    {{#Frequency}}{{Frequency}}{{/Frequency}}
-  </div>
-</header>
 
 <main lang="ja" class="front-main" style="width: 100% !important;">
   <!-- 1. Revealed Big Word Header -->
@@ -27,7 +22,7 @@
   <div id="front-hint-field" style="text-align: center; margin-top: 15px;">Target: {{Hint}}</div>
   {{/Hint}}
 
-  <!-- 5. Show Notes and Meaning below the Hint -->
+  <!-- 5. Show Notes and definition below the Hint -->
   {{#Notes}}
   <div class="back-notes" style="margin-top: 20px; text-align: left; font-size: 0.9em; border-top: 1px inset var(--bg-inset); padding-top: 15px;">
     {{Notes}}
@@ -36,22 +31,20 @@
 
   {{#MainDefinition}}
   <div class="back-meaning" style="margin-top: 15px; text-align: left; font-size: 0.9em;">
-    <strong>Meaning:</strong>
-    <div style="margin-top: 5px;">{{MainDefinition}}</div>
+    {{MainDefinition}}
   </div>
   {{/MainDefinition}}
 
   {{^MainDefinition}}
   {{#Glossary}}
   <div class="back-meaning" style="margin-top: 15px; text-align: left; font-size: 0.9em;">
-    <strong>Meaning:</strong>
-    <div style="margin-top: 5px;">{{Glossary}}</div>
+    {{Glossary}}
   </div>
   {{/Glossary}}
   {{/MainDefinition}}
 
-  <!-- Hidden Audio elements to trigger automatic pronunciation playback -->
-  <div style="display: none;">{{ExpressionAudio}} {{SentenceAudio}}</div>
+  <!-- Audio controls: play automatically and remain available for replay -->
+  <div class="back-audio-buttons">{{ExpressionAudio}} {{tts ja_JP voices=O-ren_(Enhanced),O-ren,Apple_O-ren_(Enhanced),Apple_O-ren,Siri,Apple_Siri,Kyoko_(Enhanced),Kyoko,Apple_Kyoko_(Enhanced),Apple_Kyoko:kanji:Sentence}}</div>
 </main>
 
 <style>

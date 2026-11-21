@@ -148,6 +148,7 @@ main {
   font-weight: normal;
   color: inherit;
 }
+
 #front-hint {
   font-size: var(--front-hint-font-size);
   margin-top: -5px;
@@ -539,9 +540,11 @@ summary {
   padding: 1px 3px;
   font-size: 9px;
 }
+.front-audio-buttons,
 .back-audio-buttons {
   margin-top: 10px;
 }
+.mobile .front-audio-buttons,
 .mobile .back-audio-buttons {
   position: fixed;
   bottom: 0;

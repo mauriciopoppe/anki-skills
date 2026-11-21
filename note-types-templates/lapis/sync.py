@@ -30,6 +30,14 @@ def main():
     current_templates = invoke("modelTemplates", modelName=model_name)
     print("Current templates in Anki:", list(current_templates.keys()))
 
+    # Remove the legacy per-note audio-card flag. SentenceAudio is now shown
+    # as a replayable control on the regular Comprehension card.
+    current_fields = invoke("modelFieldNames", modelName=model_name)
+    if "IsAudioCard" in current_fields:
+        print("Removing legacy field IsAudioCard...")
+        invoke("modelFieldRemove", modelName=model_name, fieldName="IsAudioCard")
+        print("Legacy field removed successfully.")
+
     # 2. Rename legacy 'Mining' template to 'Comprehension' if present
     if "Mining" in current_templates:
         print("Found legacy template name 'Mining'. Renaming to 'Comprehension'...")
