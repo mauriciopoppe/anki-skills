@@ -9,19 +9,20 @@ Generic Cloze note type shared across multiple language decks. For language-spec
 - **Sync to Anki:**
 
 ```bash
-curl -s -X POST http://localhost:8765 -d "$(jq -n \
-  --arg f "$(cat note-types-templates/my-cloze/front.html)" \
-  --arg b "$(cat note-types-templates/my-cloze/back.html)" \
-  '{action: "updateModelTemplates", version: 6, params: {model: {name: "My Cloze", templates: {Cloze: {Front: $f, Back: $b}}}}}')" && \
-  curl -s -X POST http://localhost:8765 -d "$(jq -n \
-  --arg s "$(cat note-types-templates/my-cloze/styling.css)" \
-  '{action: "updateModelStyling", version: 6, params: {model: {name: "My Cloze", css: $s}}}')"
+python3 note-types-templates/my-cloze/sync.py
+```
+
+To also enable French native TTS (`NativeTTS=1`) on the French deck:
+
+```bash
+python3 note-types-templates/my-cloze/sync.py --enable-native-tts --dry-run
+python3 note-types-templates/my-cloze/sync.py --enable-native-tts
 ```
 
 ## Card Layout
 
 - **Front:** `{{cloze:Expression}}`
-- **Back:** `{{cloze:Expression}}` → optional `ExpressionFurigana` (rendered with `{{furigana:...}}`) → optional `ExpressionSpanish` → optional `ExpressionEnglish` → optional `Notes` → optional `Glossary` → optional `Image` → `Tags`
+- **Back:** `{{cloze:Expression}}` → optional translations (`ExpressionFurigana`, `ExpressionSpanish`, `ExpressionEnglish`) → transparent `.answer-details` section (optional `Notes` → optional `Glossary` → optional `Image`) → optional `NativeTTS` French replay button (`fr_FR` on `cloze:Expression`) → optional `Tags`
 
 ## Fields
 
@@ -32,6 +33,7 @@ curl -s -X POST http://localhost:8765 -d "$(jq -n \
 | `ExpressionSpanish` | Optional Spanish translation shown on back. |
 | `ExpressionFurigana` | Optional Japanese furigana translation (`漢字[よみ]`) shown on back. |
 | `Frequency` | Numeric frequency metadata (used for sorting; not rendered on card). |
-| `Notes` | Optional explanation/notes box on back (supports HTML). |
-| `Glossary` | Optional reference definitions box on back. |
+| `Notes` | Optional explanation/notes section on back (supports HTML). |
+| `Glossary` | Optional reference definitions section on back. |
 | `Image` | Optional visual media on back. |
+| `NativeTTS` | Non-empty value (e.g., `"1"`) enables Anki's built-in `fr_FR` TTS replay button on `{{cloze:Expression}}` (back side). Leave empty on non-French decks. |

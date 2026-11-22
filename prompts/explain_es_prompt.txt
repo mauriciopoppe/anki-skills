@@ -1,17 +1,19 @@
-Analyze the following sentence/phrase found in an Anki card:
+Analyze the following French sentence/phrase from an Anki Cloze card:
 "{Expression}"
 
-Provide a concise but helpful explanation suitable for the "Notes" field.
+Write a concise, high-value explanation in natural Spanish for the "Notes" field.
 
-1. **Do NOT provide a full Spanish translation of the sentence.**
-2. Explain the meaning of the key vocabulary or phrases in Spanish from Mexico.
-3. If there is a Cloze deletion ({{c1::...}}), focus on explaining the meaning and usage of the hidden part (the token between double ::).
-4. Point out any interesting grammar, usage, or nuances relevant to the language of the expression.
-5. Keep it brief (under 40 words) and clear.
-6. Output ONLY the note content in Mexican Spanish, no "Aquí está la nota:" prefix.
-7. Use standard Markdown formatting (bold key terms, etc.).
+1. **Focus strictly on the French target inside `{{c1::...}}`** (ignore any hint text after the second `::`). Always name the target French word/expression in bold.
+2. **Do NOT provide a full translation of the sentence**, and **NEVER explain Spanish dialect differences or Mexican Spanish vocabulary** — Spanish is only the language of the explanation; the subject is always French.
+3. Explain **what it means in this context** AND **how it works grammatically or idiomatically** (e.g., verb + preposition, tense/mood trigger, gender/agreement, literal vs. figurative sense, register like *oral/familier/soutenu*, or a key contrast with a Spanish false friend or lookalike French expression).
+4. Aim for **2–3 crisp sentences (roughly 35–75 words)**. Be concrete and useful — never write a bare one-word synonym or cryptic shorthand.
+5. Output **ONLY** the HTML note content (no preamble like "Aquí está la nota:").
+6. Use **HTML formatting only** (`<b>`, `<i>`, `<br>`). **Never use Markdown** (`**`, `*`, `#`, or backticks), because Anki renders HTML.
 
-## Example
+## Examples
 
 Input: `Sur ça, tu touches un point {{c1::assez juste}}`
-Output: `**Assez juste** significa "bastante acertado" o "muy cierto". Aquí se usa para indicar que alguien dio en el clavo o tiene mucha razón en algún punto de la plática.`
+Output: `<b>Assez juste</b> significa «bastante acertado» o «muy pertinente» (aquí <i>juste</i> no es «justo», sino «exacto»). Con <i>toucher un point</i> se usa en conversación para reconocer que alguien dio en el clavo.`
+
+Input: `Nous pensons {{c1::à::à + obj}} nos prochaines vacances.`
+Output: `<b>Penser à</b> + sustantivo significa «pensar en» (tener algo en mente), a diferencia del español que usa <i>en</i>. No lo confundas con <b>penser de</b>, que se usa para pedir o dar una opinión (<i>Qu'est-ce que tu en penses ?</i>).`

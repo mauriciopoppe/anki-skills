@@ -1,179 +1,158 @@
 :root {
-  /* --- Color Theme --- */
-  --light-mode-bg-color: #fffaf0;
-  --light-mode-fg-color: #333333;
-  --light-mode-bold: #0077cc;
-  --dark-mode-bold: lightblue;
-
-  /* --- Font Sizes --- */
-  --main-font-size: 20px;
-  --sentence-font-size: 20px;
-  --info-font-size: 16px;
-
-  /* --- Fonts --- */
-  --font-serif: "Georgia", serif;
-  --font-sans: "Arial", sans-serif;
-
-  /* --- Layout --- */
-  --max-width: 800px;
+  --cloze-bg: #f7f7f5;
+  --cloze-fg: #252525;
+  --cloze-muted: #6b6b6b;
+  --cloze-accent: #3f6f9f;
+  --cloze-panel: #ffffff;
+  --cloze-border: #deded9;
+  --font-serif: "Noto Sans JP", "Hiragino Maru Gothic ProN", "Yu Mincho",
+    HanaMinA, HanaMinB, serif;
+  --font-sans: "Inter", "SF Pro Display", "Liberation Sans", "Segoe UI",
+    "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Meiryo", HanaMinA,
+    HanaMinB, sans-serif;
 }
 
 .card {
-  font-family: var(--font-sans);
-  font-size: var(--main-font-size);
-  background-color: var(--light-mode-bg-color);
-  color: var(--light-mode-fg-color);
-  text-align: center;
-  line-height: 1.6;
+  box-sizing: border-box;
   margin: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.card.nightMode {
-  background-color: #2c2c2c;
-  color: #fcfcfc;
-  --light-mode-bold: var(--dark-mode-bold);
-}
-
-/* Common */
-b, strong { color: var(--light-mode-bold); font-weight: 600; }
-a { color: #3b82f6; text-decoration: none; }
-.nightMode a { color: #60a5fa; }
-
-/* Layout */
-header {
-  height: 30px;
-  padding: 5px 10px;
-  text-align: right;
-  font-size: 0.8rem;
-  color: #888;
-}
-
-main {
-  width: min(var(--max-width), calc(100% - 30px));
-  margin: 0 auto;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Changed from center to accommodate scrolling */
-  padding-bottom: 20px;
-}
-
-footer {
-  padding: 10px;
-  font-size: 0.8rem;
-  color: #888;
-}
-
-/* Frequency Tag */
-.freq-tag {
-    background: rgba(0,0,0,0.08);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.75em;
-    font-weight: bold;
-    color: #666;
-}
-.nightMode .freq-tag {
-    background: rgba(255,255,255,0.15);
-    color: #ccc;
-}
-
-/* Front Content */
-.front-sentence {
+  padding: 24px;
+  background: var(--cloze-bg);
+  color: var(--cloze-fg);
   font-family: var(--font-sans);
-  font-size: var(--sentence-font-size);
-  margin-block: 40px;
+  text-align: center;
+  font-size: 18px;
 }
 
-.expression-spanish, .expression-english {
-    font-family: var(--font-serif);
-    color: #666;
-    font-style: italic;
-    margin-bottom: 10px;
-}
-.nightMode .expression-spanish, .nightMode .expression-english {
-    color: #aaa;
+.cloze-card {
+  width: min(720px, 100%);
+  margin: 0 auto;
 }
 
-/* Cloze styling */
+b,
+strong {
+  color: var(--cloze-accent);
+  font-weight: 600;
+}
+
+a {
+  color: var(--cloze-accent);
+  text-decoration: none;
+}
+
+.expression {
+  font-family: var(--font-sans);
+  margin: 40px 0 0;
+  font-size: clamp(1.3rem, 4.2vw, 1.75rem);
+  line-height: 1.65;
+}
+
 .cloze {
-    font-weight: bold;
-    color: var(--light-mode-bold);
-    border-bottom: 2px solid transparent;
-}
-.nightMode .cloze {
-    color: var(--dark-mode-bold);
+  color: var(--cloze-accent);
+  font-weight: 700;
 }
 
-/* Back Elements */
-.back-sentence {
+.answer-details {
+  font-family: var(--font-sans);
+  margin-top: 28px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--cloze-border);
+  background: transparent;
+  text-align: left;
+}
+
+.answer-details:not(:has(*)) {
+  display: none;
+}
+
+.answer-details > :first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.translation {
+  color: var(--cloze-muted);
+  font-size: 1.05rem;
   line-height: 1.5;
-  margin-top: 40px;
+  margin-top: 12px;
+}
+
+.expression-furigana {
+  font-family: var(--font-serif);
+  color: var(--cloze-fg);
+  font-size: 1.2rem;
+  line-height: 1.9;
+}
+
+.expression-furigana ruby rt {
+  font-size: 0.52em;
+}
+
+.notes,
+.glossary {
+  font-family: var(--font-sans);
+  color: var(--cloze-fg);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--cloze-border);
+  font-size: 0.92em;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.notes p,
+.glossary p {
+  margin: 0.4em 0;
+}
+
+.notes p:first-child,
+.glossary p:first-child {
+  margin-top: 0;
+}
+
+.notes p:last-child,
+.glossary p:last-child {
   margin-bottom: 0;
 }
 
-.cloze-expression {
-  /* Inherit font-size from parent to match front */
-}
-
-.expression-spanish, .expression-english {
-  font-family: var(--font-serif);
-  font-size: 0.8em;
-  color: #666;
-  font-style: italic;
-}
-
-.nightMode .expression-spanish, .nightMode .expression-english {
-  color: #aaa;
-}
-
-.notes {
-  background-color: rgba(0,0,0,0.04);
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: left;
-  border-left: 4px solid var(--light-mode-bold);
-  font-size: 0.95em;
-}
-.nightMode .notes {
-    background-color: rgba(255,255,255,0.08);
-    border-left-color: var(--dark-mode-bold);
-}
-
-.definition-box {
-  text-align: left;
-  margin: 20px 0;
-  padding: 15px;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  font-size: 0.95em;
-}
-.nightMode .definition-box {
-    border-top: 1px solid rgba(255,255,255,0.2);
-}
-
 .image-container {
-    margin-top: 20px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--cloze-border);
+  text-align: center;
 }
+
 .image-container img {
   max-width: 100%;
   max-height: 350px;
-  border-radius: 6px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  border: 1px solid var(--cloze-border);
 }
 
-/* Tags */
-.tags {
-    background: rgba(0,0,0,0.05);
-    padding: 3px 8px;
-    border-radius: 12px;
-    display: inline-block;
-    margin: 0 2px;
+.audio {
+  font-family: var(--font-sans);
+  margin-top: 22px;
+  font-size: 1.05rem;
 }
-.nightMode .tags {
-    background: rgba(255,255,255,0.1);
+
+.card-footer {
+  margin-top: 24px;
+  font-size: 0.78rem;
+  color: var(--cloze-muted);
+}
+
+.tags {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--cloze-border);
+  border-radius: 999px;
+}
+
+.nightMode {
+  --cloze-bg: #202124;
+  --cloze-fg: #f1f3f4;
+  --cloze-muted: #bdc1c6;
+  --cloze-accent: #8ab4f8;
+  --cloze-panel: #292a2d;
+  --cloze-border: #45464a;
 }

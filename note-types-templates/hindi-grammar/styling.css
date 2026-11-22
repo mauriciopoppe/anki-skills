@@ -1,0 +1,165 @@
+:root {
+  --grammar-bg: #f7f7f5;
+  --grammar-fg: #252525;
+  --grammar-muted: #6b6b6b;
+  --grammar-accent: #3f6f9f;
+  --grammar-panel: #ffffff;
+  --grammar-border: #deded9;
+  --font-sans: "Inter", "SF Pro Display", "Liberation Sans", "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+  --font-devanagari: "Kohinoor Devanagari", "Noto Sans Devanagari",
+    "Devanagari Sangam MN", sans-serif;
+}
+
+.card {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 24px;
+  background: var(--grammar-bg);
+  color: var(--grammar-fg);
+  font-family: var(--font-sans);
+  text-align: center;
+  font-size: 18px;
+}
+
+.grammar-card {
+  width: min(720px, 100%);
+  margin: 0 auto;
+}
+
+.sentence-prompt {
+  font-family: var(--font-sans);
+  margin: 36px 0 24px;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--grammar-muted);
+}
+
+.sentence-hindi {
+  font-family: var(--font-sans);
+  font-size: clamp(1.35rem, 4.5vw, 1.95rem);
+  line-height: 1.65;
+}
+
+.sentence-devanagari {
+  font-family: var(--font-devanagari);
+  margin-top: 12px;
+  font-size: clamp(1.2rem, 3.8vw, 1.55rem);
+  line-height: 1.7;
+  color: var(--grammar-muted);
+}
+
+.grammar-card-front .sentence-hindi {
+  color: var(--grammar-muted);
+  opacity: 0.45;
+}
+
+.grammar-card-front .cloze {
+  color: var(--grammar-fg);
+  opacity: 1;
+}
+
+.cloze {
+  color: var(--grammar-accent);
+  font-weight: 700;
+}
+
+.cue {
+  font-family: var(--font-sans);
+  display: inline-block;
+  margin-top: 28px;
+  padding: 10px 14px;
+  border: 1px solid var(--grammar-border);
+  border-radius: 8px;
+  color: var(--grammar-muted);
+  font-size: 1.02rem;
+}
+
+.answer-details {
+  font-family: var(--font-sans);
+  margin-top: 28px;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--grammar-border);
+  background: transparent;
+  text-align: left;
+}
+
+.lesson-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--grammar-muted);
+  font-size: 0.85em;
+  line-height: 1.3;
+}
+
+.explanation {
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.explanation-detail {
+  margin-top: 6px;
+  color: var(--grammar-muted);
+  font-size: 0.88em;
+  line-height: 1.45;
+}
+
+.transformation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 1.2rem;
+}
+
+.devanagari-part {
+  font-family: var(--font-devanagari);
+  color: var(--grammar-muted);
+}
+
+.notes {
+  font-family: var(--font-sans);
+  color: var(--grammar-fg);
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--grammar-border);
+  font-size: 0.92em;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.notes b,
+.notes strong {
+  color: var(--grammar-accent);
+  font-weight: 600;
+}
+
+.notes p {
+  margin: 0.4em 0;
+}
+
+.notes p:first-child {
+  margin-top: 0;
+}
+
+.notes p:last-child {
+  margin-bottom: 0;
+}
+
+.audio {
+  font-family: var(--font-sans);
+  margin-top: 22px;
+  font-size: 1.05rem;
+}
+
+.nightMode {
+  --grammar-bg: #202124;
+  --grammar-fg: #f1f3f4;
+  --grammar-muted: #bdc1c6;
+  --grammar-accent: #8ab4f8;
+  --grammar-panel: #292a2d;
+  --grammar-border: #45464a;
+}

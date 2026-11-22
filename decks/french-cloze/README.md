@@ -1,6 +1,6 @@
 # French Cloze Deck
 
-Augmentation and content playbook for a French cloze vocabulary/phrases deck (e.g., `Language French::My french words and phrases`).
+Augmentation and content playbook for a French cloze vocabulary/phrases deck (e.g., `Language French::Mining`).
 
 - **Note Type:** [`My Cloze`](../../note-types-templates/my-cloze/README.md)
 - **Companion Prompts:**

@@ -39,7 +39,8 @@ python3 note-types-templates/japanese-grammar/sync.py
 | `Answer` | Bolded right side of `.transformation`. |
 | `AnswerReading` | Muted reading in parentheses `（...）` beside `Answer`. |
 | `TargetClass` | Classification metadata (not rendered on card). |
-| `Explanation` | Primary explanation text below `.lesson-header`. |
+| `Explanation` | Primary 1-line explanation text below `.lesson-header`. |
+| `ExplanationDetail` | Optional smaller, muted breakdown below `Explanation` (e.g., etymology or cross-pattern connections). |
 | `Notes` | Secondary block below a top divider (supports HTML `<b>`, `<i>`, `<br>`, `<p>`). |
 | `SentenceAudio` | Fallback audio when `NativeTTS` is empty. |
 | `TargetFrequency` | Frequency metadata. |

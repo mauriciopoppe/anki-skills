@@ -1,0 +1,49 @@
+<main class="grammar-card" lang="fr">
+  <div class="sentence-prompt" lang="es">{{SentenceSpanish}}</div>
+  <div class="sentence-french">{{cloze:SentenceCloze}}</div>
+
+  <section class="answer-details" lang="es">
+    <div class="lesson-header">
+      {{#Lesson}}<span class="lesson-name">{{Lesson}}</span>{{/Lesson}}
+      {{#GrammarPoint}}<span class="lesson-sep" aria-hidden="true">·</span><span class="grammar-point">{{GrammarPoint}}</span>{{/GrammarPoint}}
+    </div>
+
+    {{#Explanation}}<div class="explanation">{{Explanation}}</div>{{/Explanation}}
+    {{#ExplanationDetail}}<div class="explanation-detail">{{ExplanationDetail}}</div>{{/ExplanationDetail}}
+
+    <div class="transformation" lang="fr">
+      <span class="target-part">{{Target}}</span>
+      <span class="arrow-part" aria-hidden="true">→</span>
+      <strong class="answer-part">{{Answer}}</strong>
+    </div>
+
+    {{#Notes}}<div class="notes">{{Notes}}</div>{{/Notes}}
+  </section>
+
+  {{#NativeTTS}}<div class="audio native-tts">{{tts fr_FR voices=Thomas_(Enhanced),Thomas,Apple_Thomas_(Enhanced),Apple_Thomas,Audrey_(Enhanced),Audrey,Apple_Audrey_(Enhanced),Apple_Audrey,Siri,Apple_Siri:Sentence}}</div>{{/NativeTTS}}
+  {{^NativeTTS}}
+  {{#SentenceAudio}}<div class="audio">{{SentenceAudio}}</div>{{/SentenceAudio}}
+  {{/NativeTTS}}
+</main>
+
+<script>
+  (() => {
+    const target = document.querySelector(".target-part");
+    const arrow = document.querySelector(".arrow-part");
+    const answer = document.querySelector(".answer-part");
+    if (target && arrow && answer && target.textContent.trim() === answer.textContent.trim()) {
+      target.hidden = true;
+      arrow.hidden = true;
+    }
+
+    const lesson = document.querySelector(".lesson-name");
+    const sep = document.querySelector(".lesson-sep");
+    const point = document.querySelector(".grammar-point");
+    if (lesson && sep && point && lesson.textContent.trim().toLowerCase() === point.textContent.trim().toLowerCase()) {
+      sep.hidden = true;
+      point.hidden = true;
+    } else if (!lesson && sep) {
+      sep.hidden = true;
+    }
+  })();
+</script>

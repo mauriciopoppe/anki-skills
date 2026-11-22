@@ -6,7 +6,7 @@ Content rules and card-creation playbook for a Japanese grammar production deck 
 - **Companion Prompts:**
   - Sentence generation: [`prompts/grammar_sentence_ja_prompt.txt`](../../prompts/grammar_sentence_ja_prompt.txt)
   - Quick Memory Hooks: [`prompts/grammar_kanji_hook_ja_prompt.txt`](../../prompts/grammar_kanji_hook_ja_prompt.txt)
-- **Companion Skills:** `anki-add-furigana`, `anki-add-notes`, `anki-add-audio`, `anki-backup-deck`
+- **Companion Skills:** `anki-add-furigana`, `anki-add-notes`, `anki-backup-deck`
 - **Workflows:**
   - Promoting Yomitan mined words into this deck: [`promote-mined-vocab.md`](./promote-mined-vocab.md)
 

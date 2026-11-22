@@ -1,6 +1,6 @@
 # Hindi Cloze Deck
 
-Augmentation and content playbook for a Hindi cloze vocabulary/phrases deck (e.g., `Language Hindi::My hindi words and phrases`).
+Augmentation and content playbook for a Hindi cloze vocabulary/phrases deck (e.g., `Language Hindi::Mining`).
 
 - **Note Type:** [`My Cloze`](../../note-types-templates/my-cloze/README.md)
 - **Companion Prompts:**

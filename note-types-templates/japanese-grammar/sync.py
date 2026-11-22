@@ -48,6 +48,7 @@ FIELDS = [
     "AnswerReading",
     "TargetClass",
     "Explanation",
+    "ExplanationDetail",
     "Notes",
     "SentenceAudio",
     "NativeTTS",
@@ -162,6 +163,7 @@ TTS_SAMPLE_NOTE = {
 def normalize_fields(fields):
     """Add optional model fields when loading older note datasets."""
     fields.setdefault("NativeTTS", "1")
+    fields.setdefault("ExplanationDetail", "")
     return fields
 
 

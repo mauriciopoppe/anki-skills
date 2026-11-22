@@ -104,6 +104,13 @@
   line-height: 1.35;
 }
 
+.explanation-detail {
+  margin-top: 6px;
+  color: var(--grammar-muted);
+  font-size: 0.86em;
+  line-height: 1.45;
+}
+
 .transformation {
   display: flex;
   flex-wrap: wrap;

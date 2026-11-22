@@ -123,6 +123,12 @@ before acting.
 - Prefer natural daily-life language; accuracy and restricted vocabulary take priority over novelty.
 - Respect `--batch-size` and report the intended scope before large runs.
 
+### When to Use Skills vs. Direct AnkiConnect Workflows
+
+- **Always use a skill when it provides deterministic local tooling** (`anki-add-furigana` for Fugashi/UniDic readings, `anki-backup-deck` for `.apkg` exports, `anki-practice-session` for learned/upcoming vocab prompts) or when running a **guarded bulk backfill** of empty fields (`anki-add-notes`, `anki-add-frequency`, `anki-monolingual-hints`, `anki-add-sentence`) where frequency sorting, `--dry-run`, `--batch-size`, and non-overwrite invariants matter.
+- **Act directly via AnkiConnect + repo templates/playbooks** for open-ended engineering tasks not covered by a skill: editing/syncing HTML/CSS templates, diagnosing note quality or lapse patterns, selectively repairing existing notes (with a scratch backup first), building or re-ranking progressive grammar packs, renaming decks, or advising on FSRS presets.
+- Prefer Anki's built-in `{{tts ...}}` template tags over generating local MP3 audio files.
+
 ### Development Workflow
 
 1. Read the relevant `SKILL.md`, nearby scripts, and documentation before acting:
@@ -150,12 +156,16 @@ This repository separates **note types** (generic schema and presentation) from 
 
 - **Note types (`note-types-templates/<note-type>/README.md`):** field schema, card layout, markup rules, and AnkiConnect sync commands.
   - `note-types-templates/japanese-grammar/README.md` (`Japanese Grammar Production`)
+  - `note-types-templates/french-grammar/README.md` (`French Grammar Production`)
+  - `note-types-templates/hindi-grammar/README.md` (`Hindi Grammar Production`)
   - `note-types-templates/lapis/README.md` (`Lapis`)
   - `note-types-templates/my-cloze/README.md` (`My Cloze` — shared across multiple language decks)
 - **Deck playbooks (`decks/<deck-archetype>/README.md`):** which note type, prompts, skills, tags, and card-creation checklists apply to each deck.
   - `decks/japanese-grammar/README.md`
   - `decks/japanese-mining/README.md`
+  - `decks/french-grammar/README.md`
   - `decks/french-cloze/README.md`
+  - `decks/hindi-grammar/README.md`
   - `decks/hindi-cloze/README.md`
 
 ### Syncing Templates to Anki via AnkiConnect
@@ -194,15 +204,10 @@ curl -s -X POST http://localhost:8765 -d "$(jq -n \
 - **Reference:** `note-types-templates/my-cloze/README.md`
 - **Anki Model:** `My Cloze`
 - **Template Name:** `Cloze`
+- **Sync Script:** `note-types-templates/my-cloze/sync.py`
 
 ```bash
-curl -s -X POST http://localhost:8765 -d "$(jq -n \
-  --arg f "$(cat note-types-templates/my-cloze/front.html)" \
-  --arg b "$(cat note-types-templates/my-cloze/back.html)" \
-  '{action: "updateModelTemplates", version: 6, params: {model: {name: "My Cloze", templates: {Cloze: {Front: $f, Back: $b}}}}}')" && \
-  curl -s -X POST http://localhost:8765 -d "$(jq -n \
-  --arg s "$(cat note-types-templates/my-cloze/styling.css)" \
-  '{action: "updateModelStyling", version: 6, params: {model: {name: "My Cloze", css: $s}}}')"
+python3 note-types-templates/my-cloze/sync.py
 ```
 
 #### C. Japanese::Grammar (Japanese Grammar Production Model)
@@ -214,4 +219,26 @@ curl -s -X POST http://localhost:8765 -d "$(jq -n \
 
 ```bash
 python3 note-types-templates/japanese-grammar/sync.py
+```
+
+#### D. French::Grammar (French Grammar Production Model)
+- **Path:** `note-types-templates/french-grammar/`
+- **Reference:** `note-types-templates/french-grammar/README.md`
+- **Anki Model:** `French Grammar Production`
+- **Template Name:** `Grammar Production`
+- **Sync Script:** `note-types-templates/french-grammar/sync.py`
+
+```bash
+python3 note-types-templates/french-grammar/sync.py --install-all
+```
+
+#### E. Hindi::Grammar (Hindi Grammar Production Model)
+- **Path:** `note-types-templates/hindi-grammar/`
+- **Reference:** `note-types-templates/hindi-grammar/README.md`
+- **Anki Model:** `Hindi Grammar Production`
+- **Template Name:** `Grammar Production`
+- **Sync Script:** `note-types-templates/hindi-grammar/sync.py`
+
+```bash
+python3 note-types-templates/hindi-grammar/sync.py --install-starter
 ```

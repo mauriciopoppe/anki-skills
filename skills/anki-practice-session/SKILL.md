@@ -13,7 +13,7 @@ This skill generates a personalized interactive language tutor prompt based on y
 
 When this skill is triggered, respect the following parameters:
 
-- `--deck`: (Required) The Anki Deck Name to process (e.g. `"Language French::My french words and phrases"`, `"Language Japanese::Kaishi 1.5k"`, `"Language Japanese::Mining"`, or `"Language Hindi::My hindi words and phrases"`).
+- `--deck`: (Required) The Anki Deck Name to process (e.g. `"Language French::Mining"`, `"Language Japanese::Kaishi 1.5k"`, `"Language Japanese::Mining"`, or `"Language Hindi::Mining"`).
 - `--limit-learned`: (Optional) Maximum number of learned words to include in the database. Defaults to `1000`.
 - `--limit-next`: (Optional) Maximum number of upcoming words/phrases to introduce and practice. Defaults to `10`.
 - `--output`: (Optional) Path to write the generated markdown prompt to. Defaults to `practice_prompt.md`.

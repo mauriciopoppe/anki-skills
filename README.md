@@ -1,6 +1,6 @@
 # Anki Skills
 
-An ecosystem of **AI Skills** for Anki that automates the creation of high-quality study materials. These tools follow the [Agent Skills](https://github.com/vercel-labs/skills) specification and enable AI agents to enrich your decks with mnemonics, i+1 example sentences, furigana, audio, conversational frequency data, and monolingual hints directly through AnkiConnect.
+An ecosystem of **AI Skills**, note-type templates, and deck playbooks for Anki that automates high-quality language study materials. These tools follow the [Agent Skills](https://github.com/vercel-labs/skills) specification and work directly with your running Anki instance via AnkiConnect.
 
 ## Getting Started
 
@@ -48,13 +48,39 @@ config/                 # Local collection profile conventions (gitignored anki-
 
 - **Note Types (`note-types-templates/`):**
   - [`japanese-grammar`](./note-types-templates/japanese-grammar/README.md) (`Japanese Grammar Production`)
+  - [`french-grammar`](./note-types-templates/french-grammar/README.md) (`French Grammar Production`)
+  - [`hindi-grammar`](./note-types-templates/hindi-grammar/README.md) (`Hindi Grammar Production`)
   - [`lapis`](./note-types-templates/lapis/README.md) (`Lapis`)
   - [`my-cloze`](./note-types-templates/my-cloze/README.md) (`My Cloze` — shared across multiple language decks)
 - **Deck Playbooks (`decks/`):**
   - [`japanese-grammar`](./decks/japanese-grammar/README.md) — Japanese grammar production cards & Quick Memory Hooks
   - [`japanese-mining`](./decks/japanese-mining/README.md) — Japanese vocabulary mining (`Lapis`)
-  - [`french-cloze`](./decks/french-cloze/README.md) — French cloze phrases (`My Cloze`)
-  - [`hindi-cloze`](./decks/hindi-cloze/README.md) — Hindi cloze phrases (`My Cloze`)
+  - [`french-grammar`](./decks/french-grammar/README.md) — French grammar production cards (A2 → B2, tailored for Spanish speakers)
+  - [`french-cloze`](./decks/french-cloze/README.md) — French cloze mining (`My Cloze`)
+  - [`hindi-grammar`](./decks/hindi-grammar/README.md) — Hindi grammar production cards (SOV track with Devanagari & native TTS)
+  - [`hindi-cloze`](./decks/hindi-cloze/README.md) — Hindi cloze mining (`My Cloze`)
+
+---
+
+## What You Can Achieve & When to Use Skills
+
+Combining **reference templates + deck playbooks + `AGENTS.md` + AnkiConnect** lets an AI agent handle both open-ended deck engineering and repeatable bulk automation:
+
+### 1. Direct Agent Workflows (No Skill Needed)
+Because your note-type schemas, sync scripts, and deck conventions live in this repo, an agent can directly:
+- **Design & sync card templates/CSS** (including Anki's built-in `{{tts}}` replay buttons, night mode, and responsive layout).
+- **Diagnose deck quality & lapses** (finding weak explanations, raw Markdown in HTML fields, target-cloze drift, or recurring grammar gaps in seen cards).
+- **Build progressive grammar decks & curricula** (`docs/<lang>/`, `starter_notes.json`, ordered `Sequence` packs) and safely re-rank unreviewed cards without touching review history.
+- **Reorganize decks & tune FSRS presets** (renaming decks while preserving presets/history, checking retention/interval settings).
+
+### 2. When to Use a Skill (`skills/anki-*`)
+Skills add the most value in two situations:
+- **Deterministic local tooling** — where an exact script outperforms ad-hoc LLM output:
+  - `anki-add-furigana`: contextual Japanese readings via Fugashi + UniDic while preserving native Cloze markup.
+  - `anki-backup-deck`: one-command `.apkg` snapshot before broad mutations.
+  - `anki-practice-session`: queries learned vs. upcoming words to assemble a structured conversation prompt.
+- **Guarded bulk backfills** — repeatable passes over dozens or hundreds of *empty* fields that enforce safety guardrails (frequency sorting, `--dry-run` previews, `--batch-size` limits, tag conventions, and never overwriting existing study material):
+  - `anki-add-notes`, `anki-add-frequency`, `anki-monolingual-hints`, `anki-add-sentence`.
 
 ---
 
@@ -72,7 +98,7 @@ Orchestrates AI augmentation of Anki notes by scanning a deck for empty fields a
 | --- | --- |
 | ![before](./resources/french-explain-before.png) | ![after](./resources/french-explain-after.png) |
 
-> Use anki-add-notes for deck "Language French::My french words and phrases", target field "Notes", and prompt file "./prompts/explain_fr_prompt.txt".
+> Use anki-add-notes for deck "Language French::Mining", target field "Notes", and prompt file "./prompts/explain_fr_prompt.txt".
 
 **2. Generate Kanji Mnemonics** — Creates a concise visual + sound memory hook for the `Notes` field.
 
@@ -84,7 +110,7 @@ Orchestrates AI augmentation of Anki notes by scanning a deck for empty fields a
 
 **3. Translate Sentences** — Translates a field (like `Expression`) into your target language, automatically cleaning Anki cloze markers.
 
-> Use anki-add-notes for deck "Language Hindi::My hindi words and phrases", target field "ExpressionEnglish", and prompt file "./prompts/translate_en_prompt.txt".
+> Use anki-add-notes for deck "Language Hindi::Mining", target field "ExpressionEnglish", and prompt file "./prompts/translate_en_prompt.txt".
 
 #### Parameters
 
@@ -102,7 +128,7 @@ Orchestrates AI augmentation of Anki notes by scanning a deck for empty fields a
 
 Transforms Anki cloze deletion hints from a source language into concise monolingual cues (definitions, synonyms, or grammar cues) in the target language, while preserving a translation in `--target-language` (defaults to English) in parentheses.
 
-> Use anki-monolingual-hints for deck "Language French::My french words and phrases" with target language "Spanish".
+> Use anki-monolingual-hints for deck "Language French::Mining" with target language "Spanish".
 
 #### Strategy Priority
 
@@ -146,7 +172,7 @@ Generates **i+1 example sentences** for learning targets, ensuring sentences onl
 
 Estimates how common a word or phrase is in a conversational setting (scale `1`–`1000`, where `1` is very common and `1000` is rare) and fills an Anki field.
 
-> Use anki-add-frequency for deck "Language Hindi::My hindi words and phrases". Process 10 notes.
+> Use anki-add-frequency for deck "Language Hindi::Mining". Process 10 notes.
 
 #### Parameters
 
@@ -155,28 +181,6 @@ Estimates how common a word or phrase is in a conversational setting (scale `1`�
 - `--limit`: (Optional) Limit processing. Defaults to `20`.
 - `--batch-size`: (Optional) Notes per AI request. Defaults to `5`.
 - `--dry-run`: (Optional) Preview results only.
-
----
-
-### `anki-add-audio`
-
-Generates MP3 audio locally on macOS with a system voice and FFmpeg, stores it in Anki media, and fills only empty audio fields.
-
-> Use anki-add-audio for deck "Language Japanese::Grammar", reading from "Sentence" and writing to "SentenceAudio" with voice "Kyoko".
-
-Run a preview from the repository root:
-
-```bash
-python3 skills/anki-add-audio/scripts/anki_add_audio.py \
-  --deck "Language Japanese::Grammar" \
-  --source-field Sentence \
-  --target-field SentenceAudio \
-  --voice Kyoko \
-  --limit 3 \
-  --dry-run
-```
-
-After reviewing the preview, remove `--dry-run` to generate and attach audio.
 
 ---
 
@@ -204,7 +208,7 @@ Supports `--interactive` / `-i`, `--limit`, `--source-field`, `--answer-field`, 
 
 Backs up an Anki deck to a single `.apkg` binary file. Use this before making significant changes to your deck.
 
-> Use anki-backup-deck to backup the "Language French::My french words and phrases" deck to "<backup-directory>".
+> Use anki-backup-deck to backup the "Language French::Mining" deck to "<backup-directory>".
 
 ---
 
@@ -231,7 +235,7 @@ Meta prompts combine multiple skills into a single workflow for processing large
 ### French Deck Monolingualization
 
 ```text
-In the deck "Language French::My french words and phrases":
+In the deck "Language French::Mining":
 - use the skill anki-add-frequency.
 - use the skill anki-add-notes with the target field "Notes" and the prompt file "./prompts/explain_es_prompt.txt".
 - use the skill anki-add-notes with the target field "ExpressionSpanish" and the prompt file "./prompts/translate_es_prompt.txt".
@@ -254,7 +258,7 @@ Process a limit of 200 notes with a batch size of 50. Parallelize where possible
 ### Hindi Deck Augmentation
 
 ```text
-In the deck "Language Hindi::My hindi words and phrases":
+In the deck "Language Hindi::Mining":
 - use the skill anki-add-frequency.
 - use the skill anki-add-notes with the target field "Notes" and the prompt file "./prompts/explain_en_prompt.txt".
 - use the skill anki-add-notes with the target field "ExpressionFurigana" and the prompt file "./prompts/translate_ja_prompt.txt".

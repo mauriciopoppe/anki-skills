@@ -1,46 +1,36 @@
-<main>
-    <div class="back-sentence">
-        <div class="cloze-expression">
-            {{cloze:Expression}}
-        </div>
-        {{#ExpressionFurigana}}
-        <div class="expression-furigana">
-            {{furigana:ExpressionFurigana}}
-        </div>
-        {{/ExpressionFurigana}}
-        {{#ExpressionSpanish}}
-        <div class="expression-spanish">
-            {{ExpressionSpanish}}
-        </div>
-        {{/ExpressionSpanish}}
-        {{#ExpressionEnglish}}
-        <div class="expression-english">
-            {{ExpressionEnglish}}
-        </div>
-        {{/ExpressionEnglish}}
-    </div>
+<main class="cloze-card">
+  <div class="expression">{{cloze:Expression}}</div>
+  {{#ExpressionFurigana}}
+  <div class="translation expression-furigana" lang="ja">{{furigana:ExpressionFurigana}}</div>
+  {{/ExpressionFurigana}}
+  {{#ExpressionSpanish}}
+  <div class="translation expression-spanish">{{ExpressionSpanish}}</div>
+  {{/ExpressionSpanish}}
+  {{#ExpressionEnglish}}
+  <div class="translation expression-english">{{ExpressionEnglish}}</div>
+  {{/ExpressionEnglish}}
 
+  <section class="answer-details">
     {{#Notes}}
-    <div class="notes">
-        {{Notes}}
-    </div>
+    <div class="notes">{{Notes}}</div>
     {{/Notes}}
 
     {{#Glossary}}
-    <div class="definition-box">
-        {{Glossary}}
-    </div>
+    <div class="glossary">{{Glossary}}</div>
     {{/Glossary}}
 
     {{#Image}}
-    <div class="image-container">
-        {{Image}}
-    </div>
+    <div class="image-container">{{Image}}</div>
     {{/Image}}
-</main>
+  </section>
 
-<footer>
-    {{#Tags}}
+  {{#NativeTTS}}
+  <div class="audio native-tts">{{tts fr_FR voices=Thomas_(Enhanced),Thomas,Apple_Thomas_(Enhanced),Apple_Thomas,Audrey_(Enhanced),Audrey,Apple_Audrey_(Enhanced),Apple_Audrey,Siri,Apple_Siri:cloze:Expression}}</div>
+  {{/NativeTTS}}
+
+  {{#Tags}}
+  <footer class="card-footer">
     <span class="tags">{{Tags}}</span>
-    {{/Tags}}
-</footer>
+  </footer>
+  {{/Tags}}
+</main>
