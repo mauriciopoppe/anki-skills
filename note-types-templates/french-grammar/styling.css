@@ -41,12 +41,17 @@
 
 .grammar-card-front .sentence-french {
   color: var(--grammar-muted);
-  opacity: 0.45;
+  opacity: 0.14;
+  transition: opacity 0.15s ease;
+}
+
+.grammar-card-front .sentence-french:hover,
+.grammar-card-front .sentence-french:active {
+  opacity: 0.65;
 }
 
 .grammar-card-front .cloze {
-  color: var(--grammar-fg);
-  opacity: 1;
+  color: inherit;
 }
 
 .cloze {
