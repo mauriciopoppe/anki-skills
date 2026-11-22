@@ -15,7 +15,7 @@ Content rules and card-creation playbook for a Japanese grammar production deck 
 - **Lesson & Ordering:** Set `Lesson` to the topic/textbook lesson (e.g., `Minna no Nihongo 5`, `Seasons`, `Prohibition`) and `Sequence` to `max(existing Sequence) + 1`.
 - **Source:** Use a unique stable ID per note (e.g., `minna-no-nihongo-l5-01`, `n5-seasons-01`).
 - **Cue (No Spoilers):** Keep `Cue` short (`X → goal`). When testing vocabulary/kanji recall, never put the Japanese answer in `Cue` (use `spring → in spring`, not `春 → in spring`).
-- **Explanation:** Write a brief 1-line grammar rule without duplicating the full translation.
+- **Explanation & ExplanationDetail:** Write a brief 1-line grammar rule in `Explanation` (the *what*) and an optional 1–2 line plain-language decision rule or contrast in `ExplanationDetail` (the *why*, e.g. `を` vs `が` or `に` vs `で`—anchored to Spanish/English intuition per [`docs/grammar-concepts.md`](../../docs/grammar-concepts.md)).
 - **Notes (Quick Memory Hook):** Add a 1–2 line kanji/reading memory hook (no `Kanji:`/`Hook:` prefixes) for hard kanji or irregular readings following `prompts/grammar_kanji_hook_ja_prompt.txt`.
 - **Audio:** Set `NativeTTS` to `"1"` and leave `SentenceAudio` empty unless custom audio is requested.
 - **Tags:** Include level + lesson/source tags (e.g., `grammar::n5`, `minna-no-nihongo-l5`, `category::calendar`, `source::youtube-<id>`).

@@ -6,13 +6,15 @@ Content rules, card-creation playbook, and mined-sentence promotion workflow for
 - **Curriculum:** [`docs/french/french-grammar-program.md`](../../docs/french/french-grammar-program.md)
 - **Companion Deck (Mining):** [`decks/french-cloze/README.md`](../french-cloze/README.md) (`Language French::Mining`)
 - **Companion Skills:** `anki-add-notes`, `anki-backup-deck`
+- **Workflows:**
+  - Promoting mined French words/phrases into this deck: [`promote-mined-vocab.md`](./promote-mined-vocab.md)
 
 ## Content Conventions
 
 - **Lesson & Ordering:** Set `Lesson` to the unit title (e.g., `1.1 Partitive & Negation`, `2.1 Futur Simple`) and `Sequence` to `max(existing Sequence) + 1` so Anki introduces lessons progressively.
 - **Source:** Use a unique stable ID per note (e.g., `fr-p1-001`, `fr-p2-001`, or `fr-mined-001` for promoted mining cards).
 - **Cue (No Spoilers):** Keep `Cue` short (`target → goal`, e.g., `tenir (je) → futur simple` or `négation → pas de`). Never include the inflected answer inside `Cue`.
-- **Explanation & ExplanationDetail:** Write a 1-line Spanish grammar rule in `Explanation` and an optional formation breakdown in `ExplanationDetail`.
+- **Explanation & ExplanationDetail:** Write a 1-line Spanish grammar rule in `Explanation` (the *what*) and an optional 1–2 line plain-language decision rule or contrast in `ExplanationDetail` (the *why*, e.g. indicative vs. subjunctive—anchored to Spanish intuition per [`docs/grammar-concepts.md`](../../docs/grammar-concepts.md)).
 - **Notes (Spanish Trap / Memory Hook):** Highlight Spanish-vs-French traps, irregular stem families, or usage nuances in HTML (`<b>`, `<i>`, `<br>`). Never use Markdown (`**`).
 - **Audio:** Set `NativeTTS` to `"1"` (uses Anki's `fr_FR` TTS on `Sentence`) and leave `SentenceAudio` empty unless custom audio is requested.
 - **Tags:** Include phase + unit tags (e.g., `grammar::a2`, `grammar::b1`, `unit::2-1-futur-simple`, `source::mined`).
